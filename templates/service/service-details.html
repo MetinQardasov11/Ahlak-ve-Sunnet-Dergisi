@@ -1,0 +1,70 @@
+{% extends "partials/_base.html" %}
+{% load static %}
+
+{% block title %} {{ service.title }} {% endblock %}
+
+{% block content %}
+
+    <div class="wpo-breadcumb-area" style="background-image: url({{ bunner.service_detail_img.url }})">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="wpo-breadcumb-wrap">
+                        <h2>{{ service.title }}</h2>
+                        <ul>
+                            <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
+                            <li><a href="{% url 'service:services' %}">Hizmetler</a></li>
+                            <li><span>{{ service.title }}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="wpo-service-single-section section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-12">
+                    <div class="wpo-service-single-wrap">
+                        <div class="wpo-service-single-content">
+                            <img src="{{ service.image.url }}" alt="image" />
+                            <div class="wpo-service-single-content-des">
+                                <h2>{{ service.title }}</h2>
+                                <p>{{ service.description|safe }}</p>
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                                    {% for img in service.images.all %}
+                                        <div style="width: 100%; height: 300px; overflow: hidden; display: flex; justify-content: center; align-items: center; border: 1px solid #ccc;">
+                                            <img src="{{ img.image.url }}" alt="image" style="width: 100%; height: 100%; object-fit: cover;">
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-8">
+                    <div class="wpo-single-sidebar">
+                        <div class="wpo-service-widget widget">
+                            <h2>All Services</h2>
+                            <ul class="wpo-service-widget">
+                                {% for item in services %}
+                                    <li>
+                                        <a href="{% url 'service:service_detail' item.slug %}" 
+                                        style="{% if service and service.slug == item.slug %}background: #ce9124; color: #fff;{% endif %}">
+                                            {{ item.title }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

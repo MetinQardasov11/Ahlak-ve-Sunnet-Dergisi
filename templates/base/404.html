@@ -1,0 +1,45 @@
+{% extends "partials/_base.html" %}
+{% load static %}
+
+{% block title %} Error {% endblock %}
+
+{% block content %}
+
+    <div class="wpo-breadcumb-area" style="background-image: url({{ bunner.error_img.url }})">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="wpo-breadcumb-wrap">
+                        <h2>{{ bunner.error_title }}</h2>
+                        <ul>
+                            <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
+                            <li><span>{{ bunner.error_title }}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="error-404-section section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col col-xs-12">
+                    <div class="content clearfix">
+                        <div class="error">
+                            <img src="{% static 'assets/images/error-404.png' %}" alt>
+                        </div>
+                        <div class="error-message">
+                            <h3>Oops! Page Not Found!</h3>
+                            <p>We’re sorry but we can’t seem to find the page you requested. This might be
+                                because
+                                you have typed the web address incorrectly.</p>
+                            <a href="{% url 'base:index' %}" class="theme-btn">Back to home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

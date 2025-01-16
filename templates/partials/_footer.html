@@ -1,0 +1,93 @@
+{% load static %}
+
+    <footer class="site-footer">
+        <div class="upper-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="widget about-widget">
+                            <div class="logo widget-title">
+                                <img src="{{ item.footer_img.url }}" width="80" class="img-fluid" style="border-radius: 20px;" alt="{{ item.title }}">
+                            </div>
+                            <p>{{ item.description|safe }}</p>
+                            <div class="social-widget">
+                                <ul>
+                                    {% if item.facebook %}
+                                        <li><a href="{{ item.facebook }}"><i class="ti-facebook"></i></a></li>
+                                    {% endif %}
+
+                                    {% if item.twitter %}
+                                        <li><a href="{{ item.twitter }}"><i class="ti-twitter-alt"></i></a></li>
+                                    {% endif %}
+
+                                    {% if item.youtube %}
+                                        <li><a href="{{ item.youtube }}"><i class="ti-youtube"></i></a></li>
+                                    {% endif %}
+
+                                    {% if item.instagram %}
+                                        <li><a href="{{ item.instagram }}"><i class="ti-instagram"></i></a></li>
+                                    {% endif %}
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="widget link-widget">
+                            <div class="widget-title">
+                                <h3>Servisler</h3>
+                            </div>
+                            <ul>
+                                {% for item in last_5_services %}
+                                    <li>
+                                        <a href="{% url 'service:service_detail' item.slug %}">{{ item.title }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="widget link-widget s2">
+                            <div class="widget-title">
+                                <h3>Hızlı Bağlantılar</h3>
+                            </div>
+                            <ul>
+                                <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
+                                <li><a href="{% url 'base:about' %}">Hakkımızda</a></li>
+                                <li><a href="{% url 'blog:blogs' %}">Bloglar</a></li>
+                                <li><a href="{% url 'service:services' %}">Hizmetler</a></li>
+                                <li><a href="{% url 'contact:contact' %}">İletişim</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="widget newsletter-widget">
+                            <div class="widget-title">
+                                <h3>Abonel Ol</h3>
+                            </div>
+                            <form action="{% url 'base:index' %}" method="post">
+                                {% csrf_token %}
+                                {{ form.email }}
+                                <button type="submit" class="theme-btn">Abone ol</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="lower-footer">
+            <div class="container">
+                <div class="row g-0 d-flex justify-content-center">
+                    <div class="col col-lg-6 col-12">
+                        <p class="text-center text-white mb-3">
+                            &copy;
+                            <span style="color: #FED91F; font-weight: bolder"> {{ item.title }}</span>
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script> Tüm hakları saklıdır.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>

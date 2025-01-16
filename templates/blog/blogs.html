@@ -1,0 +1,95 @@
+{% extends "partials/_base.html" %}
+{% load static %}
+
+{% block title %} Bloglar {% endblock %}
+
+{% block content %}
+
+    <div class="wpo-breadcumb-area" style="background-image: url({{ bunner.blog_img.url }})">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="wpo-breadcumb-wrap">
+                        <h2>{{ bunner.blog_title }}</h2>
+                        <ul>
+                            <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
+                            <li><span>{{ bunner.blog_title }}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="wpo-blog-pg-section section-padding">
+        <div class="container">
+            <div class="row">
+                {% if page_obj %}
+                    {% for blog in page_obj %}
+                        <div class="col-lg-4 col-md-6 col-sm-12" style="margin-bottom: 30px;">
+                            <a href="{% url 'blog:blog_detail' blog.slug %}" style="text-decoration: none;">
+                                <div class="wpo-blog-content" style="background: #fff; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; hover: transform: scale(1.05);">
+                                    <div class="post format-standard-image">
+                                        <div class="entry-media" style="overflow: hidden; position: relative;">
+                                            <img src="{{ blog.image.url }}" class="img-fluid" style="border-radius: 15px 15px 0 0; transition: transform 0.3s ease; width: 100%; height: 250px;" alt>
+                                        </div>
+                                        <div class="entry-details" style="padding: 20px; text-align: center;">
+                                            <h4 style="font-size: 18px; color: #333; font-weight: bold;"><a href="{% url 'blog:blog_detail' blog.slug %}" style="color: #333; text-decoration: none;">{{ blog.title }}</a></h4>
+                                            <p style="font-size: 14px; color: #666; margin-top: 10px;">{{ blog.description|safe|truncatewords:15 }}</p>
+                                            <a href="{% url 'blog:blog_detail' blog.slug %}" class="read-more" style="color: #E8C960; font-weight: bold; text-transform: uppercase; text-decoration: none;">Daha Fazlası ...</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="alert alert-warning" role="alert" style="background-color: #FFF3CD; color: #856404; border: 1px solid #ffeeba; padding: 15px; border-radius: 5px; font-size: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        <i class="fa fa-exclamation-circle" style="margin-right: 10px; font-size: 20px;"></i> 
+                        Henüz blog ilave olunmayıb
+                    </div>
+                {% endif %}
+            </div>
+            <div class="pagination-wrapper">
+                <ul class="pg-pagination">
+                    {% if page_obj.has_previous %}
+                        <li>
+                            <a href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                <i class="fi ti-angle-left"></i>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="disabled">
+                            <a href="" aria-label="Previous">
+                                <i class="fi ti-angle-left"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <li class="active"><a href="#">{{ num }}</a></li>
+                        {% else %}
+                            <li><a href="?page={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li>
+                            <a href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                <i class="fi ti-angle-right"></i>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="disabled">
+                            <a href="#" aria-label="Next">
+                                <i class="fi ti-angle-right"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

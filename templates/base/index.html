@@ -1,0 +1,170 @@
+{% extends "partials/_base.html" %}
+{% load static %}
+
+{% block title %} Ana Sayfa {% endblock %}
+
+{% block content %}
+
+    <section class="hero-slider" style="border-bottom: 3px solid #E8C960;">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                {% for item in sliders %}
+                    <div class="swiper-slide">
+                        <div class="slide-inner slide-bg-image" data-background="{{ item.image.url }}">
+                            <div class="container">
+                                <div class="slide-content">
+                                    <div data-swiper-parallax="300" class="slide-title">
+                                        <h2>{{ item.title }}</h2>
+                                    </div>
+                                    <div data-swiper-parallax="400" class="slide-text">
+                                        <p>{{ item.description|safe }}</p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div data-swiper-parallax="500" class="slide-btns">
+                                        <a href="{% url 'base:about' %}" class="theme-btn">Daha Fazlası</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="container">
+            <div class="wrap">
+                <div class="row align-items-lg-center">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <img src="{{ about.image.url }}" style="border-radius: 30px;" alt="">
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="content" style="padding: 25px 40px;">
+                            <div class="section-title">
+                                <h2>Hakkımızda</h2>
+                                <h3>{{ about.title }}</h3>
+                                <p style="padding-right: 0px;">{{ about.description|safe|truncatewords:50 }}</p>
+                            </div>
+                            <div class="about-bottom d-flex justify-content-center">
+                                <a href="{% url 'base:about' %}" class="theme-btn">Daha Fazlası</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-section-s2" style="border-bottom: 3px solid #E8C960;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-7 col-12">
+                    <div class="section-title">
+                        <h2>Servislerimiz</h2>
+                        <h3>Hizmetlerimiz</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="service-wrap">
+                <div class="row">
+                    {% for item in last_3_services %}
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-12">
+                            <div class="service-card" style="height: 380px;">
+                                <div class="top-number">
+                                    <span>0{{ forloop.counter }}</span>
+                                </div>
+                                <div class="icon">
+                                    <img src="{% static 'assets/images/service/6.svg' %}" alt="image">
+                                </div>
+                                <div class="text">
+                                    <h2>{{ item.title }}</h2>
+                                    <p>{{ item.description|safe|truncatewords:10 }}</p>
+                                    <a href="{% url 'service:service_detail' item.slug %}">Daha Fazla...</a>
+                                </div>
+                                <div class="image">
+                                    <img src="{{ item.image.url }}" alt="image" />
+                                    <h2 class="img-title">{{ item.title }}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+                <div class="d-flex justify-content-center mt-3 mb-5">
+                <a href="{% url 'service:services' %}" class="theme-btn" style="background: #DB9E2F; color: #fff; padding: 12px 40px; border-radius: 25px; text-transform: uppercase; text-decoration: none; font-weight: bold; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
+                    Daha Fazlası
+                </a>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="funfact-section section-padding" style="border-bottom: 3px solid #E8C960; background-image: url({{ statistic_info.image.url }}); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-10 col-12">
+                    <div class="funfact-content">
+                        <div class="top-content">
+                            <h3 class="sudtitle">{{ statistic_info.title }}</h3>
+                            <p class="text">{{ statistic_info.description }}</p>
+                        </div>
+                        <div class="funfact">
+                            {% for item in statistics %}
+                                <div class="item">
+                                    <h2><span class="odometer" data-count="{{ item.value }}">00</span>+</h2>
+                                    <h4>{{ item.title }}</h4>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <a href="{% url 'base:about' %}" class="theme-btn">Hakkımızda</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="wpo-blog-pg-section" style="border-bottom: 3px solid #E8C960; margin-top: 50px; background: #f9f9f9; padding: 40px 0;">
+        <div class="container" style="max-width: 1200px;">
+            <div class="row justify-content-center">
+                <div class="col-lg-7 col-12">
+                    <div class="section-title" style="text-align: center; margin-bottom: 30px;">
+                        <h2 style="font-size: 36px; font-weight: bold; color: #333;">Bloglar</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for blog in last_3_blogs %}
+                    <div class="col-lg-4 col-md-6 col-sm-12" style="margin-bottom: 30px;">
+                        <a href="{% url 'blog:blog_detail' blog.slug %}" style="text-decoration: none;">
+                            <div class="wpo-blog-content" style="background: #fff; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; hover: transform: scale(1.05);">
+                                <div class="post format-standard-image">
+                                    <div class="entry-media" style="overflow: hidden; position: relative;">
+                                        <img src="{{ blog.image.url }}" class="img-fluid" style="border-radius: 15px 15px 0 0; transition: transform 0.3s ease; width: 100%; height: 250px;" alt>
+                                    </div>
+                                    <div class="entry-details" style="padding: 20px; text-align: center;">
+                                        <h4 style="font-size: 18px; color: #333; font-weight: bold;"><a href="{% url 'blog:blog_detail' blog.slug %}" style="color: #333; text-decoration: none;">{{ blog.title }}</a></h4>
+                                        <p style="font-size: 14px; color: #666; margin-top: 10px;">{{ blog.description|safe|truncatewords:15 }}</p>
+                                        <a href="{% url 'blog:blog_detail' blog.slug %}" class="read-more" style="color: #E8C960; font-weight: bold; text-transform: uppercase; text-decoration: none;">Daha Fazlası ...</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="d-flex justify-content-center mt-3 mb-5">
+                <a href="{% url 'blog:blogs' %}" class="theme-btn" style="background: #DB9E2F; color: #fff; padding: 12px 40px; border-radius: 25px; text-transform: uppercase; text-decoration: none; font-weight: bold; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
+                    Daha Fazlası
+                </a>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

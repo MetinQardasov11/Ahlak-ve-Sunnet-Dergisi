@@ -1,0 +1,66 @@
+{% load static %}
+{% load i18n %}
+{% load custom_filters %}
+
+    <div class="preloader">
+        <div class="vertical-centered-box">
+            <div class="content">
+                <div class="loader-circle"></div>
+                <div class="loader-line-mask">
+                    <div class="loader-line"></div>
+                </div>
+                <img src="{{ item.nav_img.url }}" alt="Logo" style="width: 80px; height: 80px; border-radius: 50%;">
+            </div>
+        </div>
+    </div>
+
+    <header id="header">
+        <div class="wpo-site-header">
+            <nav class="navigation navbar navbar-expand-lg navbar-light">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-2 col-md-6 col-6">
+                            <div class="navbar-header" style="float: left;">
+                                <a class="navbar-brand" href="{% url 'base:index' %}"><img src="{{ item.nav_img.url }}" alt="logo" class="img-fluid" style="border-radius: 20px;" width="70"></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-6 d-lg-none dl-block">
+                            <div class="mobail-menu" style="float: right;">
+                                <button type="button" class="navbar-toggler open-btn">
+                                    <span class="sr-only"></span>
+                                    <span class="icon-bar first-angle"></span>
+                                    <span class="icon-bar middle-angle"></span>
+                                    <span class="icon-bar last-angle"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-lg-10 col-md-2 col-6 dl-block">
+                            <div id="navbar" class="collapse navbar-collapse navigation-holder">
+                                <button class="menu-close"><i class="ti-close"></i></button>
+                                <ul class="nav navbar-nav mb-2 mb-lg-0">
+                                    <li>
+                                        <a class="{% if request.path == '/' %} active {% endif %}" style="{% if request.path == '/' %}color: #db9e2f{% endif %}" href="{% url 'base:index' %}">Ana Sayfa</a>
+                                    </li>
+                                    <li>
+                                        <a class="{% if request.path == '/about/' %} active {% endif %}" style="{% if request.path == '/about/' %} color: #db9e2f {% endif %}" href="{% url 'base:about' %}">Hakkımızda</a>
+                                    </li>
+                                    <li>
+                                        <a class="{% if request.path|startswith:'/service/' %} active {% endif %}" style="{% if request.path|startswith:'/service/' %} color: #db9e2f {% endif %}" href="{% url 'service:services' %}">Servis</a>
+                                    </li>
+                                    <li>
+                                        <a class="{% if request.path|startswith:'/blog/' %} active {% endif %}" style="{% if request.path|startswith:'/blog/' %} color: #db9e2f {% endif %}" href="{% url 'blog:blogs' %}">Blog</a>
+                                    </li>
+                                    <li>
+                                        <a class="{% if request.path == '/galeries/' %} active {% endif %}" style="{% if request.path == '/galeries/' %} color: #db9e2f {% endif %}" href="{% url 'base:galeries' %}">Galeri</a>
+                                    </li>
+                                    <li>
+                                        <a class="{% if request.path == '/contact/' %} active {% endif %}" style="{% if request.path == '/contact/' %} color: #db9e2f {% endif %}" href="{% url 'contact:contact' %}">İletişim</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>

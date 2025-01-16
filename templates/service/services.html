@@ -1,0 +1,109 @@
+{% extends "partials/_base.html" %}
+{% load static %}
+
+{% block title %} Aktiviteler {% endblock %}
+
+{% block content %}
+
+    <div class="wpo-breadcumb-area" style="background-image: url({{ bunner.service_img.url }})">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="wpo-breadcumb-wrap">
+                        <h2>{{ bunner.service_title }}</h2>
+                        <ul>
+                            <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
+                            <li><span>{{ bunner.service_title }}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="service-section-s2 section-padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-7 col-12">
+                    <div class="section-title">
+                        <h2>Hizmetlerimiz</h2>
+                        <h3>İnsanlık için Hizmetlerimiz</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="service-wrap">
+                <div class="row">
+                    {% if page_obj %}
+                        {% for item in page_obj %}
+                            <div class="col-xl-4 col-lg-6 col-md-6 col-12">
+                                <div class="service-card" style="height: 380px;">
+                                    <div class="top-number">
+                                        <span>01</span>
+                                    </div>
+                                    <div class="icon">
+                                        <img src="{% static 'assets/images/service/6.svg' %}" alt="image">
+                                    </div>
+                                    <div class="text">
+                                        <h2>{{ item.title }}</h2>
+                                        <p>{{ item.description|safe|truncatewords:10 }}</p>
+                                        <a href="{% url 'service:service_detail' item.slug %}">Daha Fazla...</a>
+                                    </div>
+                                    <div class="image">
+                                        <img src="{{ item.image.url }}" alt="image" />
+                                        <h2 class="img-title">{{ item.title }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="alert alert-warning" role="alert" style="background-color: #FFF3CD; color: #856404; border: 1px solid #ffeeba; padding: 15px; border-radius: 5px; font-size: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                            <i class="fa fa-exclamation-circle" style="margin-right: 10px; font-size: 20px;"></i> 
+                            Henüz hizmet ilave olunmayıb
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="pagination-wrapper">
+                    <ul class="pg-pagination">
+                        {% if page_obj.has_previous %}
+                            <li>
+                                <a href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                    <i class="fi ti-angle-left"></i>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="disabled">
+                                <a href="" aria-label="Previous">
+                                    <i class="fi ti-angle-left"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <li class="active"><a href="#">{{ num }}</a></li>
+                            {% else %}
+                                <li><a href="?page={{ num }}">{{ num }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                            <li>
+                                <a href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                    <i class="fi ti-angle-right"></i>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="disabled">
+                                <a href="#" aria-label="Next">
+                                    <i class="fi ti-angle-right"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
