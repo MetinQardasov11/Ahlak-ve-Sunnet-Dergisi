@@ -28,14 +28,18 @@
                     {% for blog in page_obj %}
                         <div class="col-lg-4 col-md-6 col-sm-12" style="margin-bottom: 30px;">
                             <a href="{% url 'blog:blog_detail' blog.slug %}" style="text-decoration: none;">
-                                <div class="wpo-blog-content" style="background: #fff; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; hover: transform: scale(1.05);">
+                                <div class="wpo-blog-content" style="background: #fff; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;">
                                     <div class="post format-standard-image">
                                         <div class="entry-media" style="overflow: hidden; position: relative;">
                                             <img src="{{ blog.image.url }}" class="img-fluid" style="border-radius: 15px 15px 0 0; transition: transform 0.3s ease; width: 100%; height: 250px;" alt>
                                         </div>
-                                        <div class="entry-details" style="padding: 20px; text-align: center;">
-                                            <h4 style="font-size: 18px; color: #333; font-weight: bold;"><a href="{% url 'blog:blog_detail' blog.slug %}" style="color: #333; text-decoration: none;">{{ blog.title }}</a></h4>
-                                            <p style="font-size: 14px; color: #666; margin-top: 10px;">{{ blog.description|safe|truncatewords:15 }}</p>
+                                        <div class="entry-details" style="padding: 20px 10px; text-align: center;">
+                                            <h4 style="font-size: 18px; color: #333; font-weight: bold;">
+                                                <a href="{% url 'blog:blog_detail' blog.slug %}" style="color: #333; text-decoration: none;">{{ blog.title }}</a>
+                                            </h4>
+                                            <p style="font-size: 14px; color: #666; margin-top: 10px;">
+                                                {{ blog.description|safe|truncatewords:15 }}
+                                            </p>
                                             <a href="{% url 'blog:blog_detail' blog.slug %}" class="read-more" style="color: #E8C960; font-weight: bold; text-transform: uppercase; text-decoration: none;">Daha Fazlası ...</a>
                                         </div>
                                     </div>
@@ -44,12 +48,15 @@
                         </div>
                     {% endfor %}
                 {% else %}
-                    <div class="alert alert-warning" role="alert" style="background-color: #FFF3CD; color: #856404; border: 1px solid #ffeeba; padding: 15px; border-radius: 5px; font-size: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                        <i class="fa fa-exclamation-circle" style="margin-right: 10px; font-size: 20px;"></i> 
-                        Henüz blog ilave olunmayıb
+                    <div class="col-12">
+                        <div class="alert alert-warning" role="alert" style="background-color: #FFF3CD; color: #856404; border: 1px solid #ffeeba; padding: 15px; border-radius: 5px; font-size: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                            <i class="fa fa-exclamation-circle" style="margin-right: 10px; font-size: 20px;"></i> 
+                            Henüz blog ilave olunmayıb
+                        </div>
                     </div>
                 {% endif %}
             </div>
+
             <div class="pagination-wrapper">
                 <ul class="pg-pagination">
                     {% if page_obj.has_previous %}
@@ -60,7 +67,7 @@
                         </li>
                     {% else %}
                         <li class="disabled">
-                            <a href="" aria-label="Previous">
+                            <a href="#" aria-label="Previous">
                                 <i class="fi ti-angle-left"></i>
                             </a>
                         </li>
@@ -91,5 +98,6 @@
             </div>
         </div>
     </section>
+
 
 {% endblock %}

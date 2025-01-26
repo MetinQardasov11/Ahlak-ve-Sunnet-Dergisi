@@ -1,0 +1,9 @@
+{% load static %}
+
+{% for tag in tags %}
+    <meta name="{{ tag.tag_type }}" content="{{ tag.content }}" />
+{% endfor %}
+
+{% for social_tag in social_tags %}
+    <meta property="{{ social_tag.tag_type }}" content="{{ social_tag.content }}" />
+{% endfor %}

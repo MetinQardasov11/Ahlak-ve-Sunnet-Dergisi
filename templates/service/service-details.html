@@ -28,7 +28,7 @@
                 <div class="col-lg-8 col-md-12">
                     <div class="wpo-service-single-wrap">
                         <div class="wpo-service-single-content">
-                            <img src="{{ service.image.url }}" alt="image" />
+                            <img src="{{ service.image.url }}" style="border-radius: 20px;" alt="image" />
                             <div class="wpo-service-single-content-des">
                                 <h2>{{ service.title }}</h2>
                                 <p>{{ service.description|safe }}</p>
@@ -39,8 +39,6 @@
                                         </div>
                                     {% endfor %}
                                 </div>
-
-
                             </div>
                         </div>
                     </div>

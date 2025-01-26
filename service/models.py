@@ -1,12 +1,12 @@
 from django.db import models
 from django.utils.text import slugify
 from ckeditor.fields import RichTextField
+from PIL import Image
 
 class Service(models.Model):
     title = models.CharField(max_length=255, verbose_name="Servis Başlığı")
     description = RichTextField(verbose_name = "Açıklama")
     image = models.ImageField(upload_to='service_img', verbose_name = "Resim")
-    icon = models.ImageField(upload_to='service_icon', verbose_name = "İkon Resmi")
     slug = models.SlugField(null=True, blank=True, editable=False, verbose_name="Slug")
 
     created_at = models.DateField(auto_now_add=True, verbose_name = "Oluşturulma Tarihi")

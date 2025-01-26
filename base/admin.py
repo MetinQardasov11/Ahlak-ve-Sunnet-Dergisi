@@ -2,8 +2,12 @@ from django.contrib import admin
 from .models import (
     GeneralItem, HomeSlider, About, 
     IslamCondition, Statistic, StatisticInfo,
-    Subscribe, Galery, PageBunner, SEOModel
+    Subscribe, Galery, PageBunner, TemplatePage
 )
+
+@admin.register(TemplatePage)
+class TemplatePageAdmin(admin.ModelAdmin):
+    list_display = ['url', 'template_name', 'is_active',]
 
 @admin.register(GeneralItem)
 class GeneralItemAdmin(admin.ModelAdmin):
@@ -48,14 +52,3 @@ class GaleryAdmin(admin.ModelAdmin):
 @admin.register(PageBunner)
 class PageBunnerAdmin(admin.ModelAdmin):
     list_display = ('title', )
-    
-
-@admin.register(SEOModel)
-class SEOModelAdmin(admin.ModelAdmin):
-    list_display = ("title", "created_at", "updated_at", "slug")
-    prepopulated_fields = {"slug": ("title",)}
-    search_fields = ("title", "description", "keywords")
-    list_filter = ("created_at", "updated_at")
-    ordering = ("-created_at",)
-    fields = ("title", "description", "keywords", "image", "slug", "twitter_handle")
-    readonly_fields = ("created_at", "updated_at")

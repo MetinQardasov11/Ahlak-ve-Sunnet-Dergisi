@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Blog Notification</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<body style="background-color: #f4f4f9; font-family: Arial, sans-serif; margin: 0; padding: 0;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+        <div style="display: flex; align-items: center; background-color: #DB9E30; border-radius: 10px; padding: 10px;">
+            <img src="https://pbs.twimg.com/profile_images/1665458481355190279/3lJ-sU9W_400x400.jpg" width="60" height="60" style="border-radius: 50%; margin-right: 15px;" alt="Ahlak ve Sünnet Dergisi Logo">
+            <h2 style="color: white; margin: 0; flex-grow: 1; text-align: center;">Ahlak ve Sünnet Dergisi</h2>
+        </div>
+        
+        <p style="font-size: 16px; line-height: 1.6; color: #333; text-align: center;">Yeni bir blog yükləndi:</p>
+        <h3 style="font-size: 24px; color: #333; text-align: center;">{{ instance.title }}</h3>
+        <p style="font-size: 16px; line-height: 1.6; color: #555; text-align: center;">Blog haqqında daha çox məlumat üçün saytımıza daxil olun.</p>
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="#" style="padding: 12px 30px; background-color: #DB9E30; color: #fff; font-size: 16px; text-decoration: none; border-radius: 25px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);">Siteye Git</a>
+        </div>
+        
+        <footer style="text-align: center; margin-top: 40px; font-size: 14px; color: #888;">
+            <p>Bizimlə əlaqə saxlayın:</p>
+            <a href="{{ item.facebook }}" style="text-decoration: none; color: #4267B2; margin: 0 15px;">Facebook</a>
+            <a href="{{ item.twitter }}" style="text-decoration: none; color: #1DA1F2; margin: 0 15px;">Twitter</a>
+            <a href="{{ item.instagram }}" style="text-decoration: none; color: #E4405F; margin: 0 15px;">Instagram</a>
+            <a href="{{ item.youtube }}" style="text-decoration: none; color: #FF0000; margin: 0 15px;">YouTube</a>
+            <a href="" style="text-decoration: none; color: #25D366; margin: 0 15px;">WhatsApp</a>
+            <a href="" style="text-decoration: none; color: #0088CC; margin: 0 15px;">Telegram</a>
+        </footer>
+
+    </div>
+</body>
+</html>

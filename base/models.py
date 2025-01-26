@@ -3,6 +3,38 @@ from ckeditor.fields import RichTextField
 from django.utils.text import slugify
 from django.urls import reverse
 
+class TemplatePage(models.Model):
+    PAGE_CHOICES = [
+        ('base/index.html', 'Ana Sayfa'),
+        ('base/about.html', 'Hakkımızda'),
+        ('base/galery.html', 'Galeri'),
+        ('service/services.html', 'Hizmetler'),
+        ('service/service-details.html', 'Hizmet Detayları'),
+        ('blog/blogs.html', 'Blog'),
+        ('blog/blog-details.html', 'Blog Detayları'),
+        ('contact/contact.html', 'İletişim'),
+        ('base/404.html', '404 Sayfası'),
+    ]
+
+    url = models.CharField(max_length=255, unique=True, null=True, blank=True, verbose_name="Sayfanın URL yolu")
+    template_name = models.CharField(max_length=50, choices=PAGE_CHOICES, verbose_name="Sayfa türü")
+    title = models.CharField(max_length=255, verbose_name="Sayfanın başlığı")
+    description = models.TextField(blank=True, null=True, verbose_name="Sayfanın açıklaması")
+    is_active = models.BooleanField(default=True, verbose_name="Sayfanın aktif olup olmadığını belirler")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Sayfanın oluşturulma tarihi")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Sayfanın güncellenme tarihi")
+
+    def get_absolute_url(self):
+        return f"/{self.url}/"
+
+    def __str__(self):
+        return f"{self.template_name} ({self.url})"
+
+    class Meta:
+        verbose_name = "Sayfa"
+        verbose_name_plural = "Sayfalar"
+
+
 class GeneralItem(models.Model):
     title = models.CharField(max_length=200, verbose_name = "Genel Bilgi Başlığı")
     description = RichTextField(verbose_name = "Açıklama")
@@ -153,30 +185,3 @@ class PageBunner(models.Model):
 
     class Meta:
         verbose_name_plural = "Sayfa Bannerları"
-        
-
-class SEOModel(models.Model):
-    title = models.CharField(max_length=200, verbose_name="Başlık")
-    description = models.TextField(verbose_name="Açıklama", help_text="İçeriğin kısa açıklaması (SEO ve Sosyal Medya için)")
-    keywords = models.CharField(max_length=300, verbose_name="Anahtar Kelimeler", blank=True, help_text="SEO için anahtar kelimeleri virgülle ayırarak girin.")
-    image = models.ImageField(upload_to="seo_images/", verbose_name="Görsel", blank=True, null=True, help_text="Sosyal medyada gösterilecek görsel.")
-    slug = models.SlugField(unique=True, blank=True, verbose_name="Slug")
-    twitter_handle = models.CharField(max_length=100, verbose_name="Twitter Kullanıcı Adı", blank=True, null=True, help_text="Twitter kartları için kullanılır.")
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Oluşturulma Tarihi")    
-    updated_at = models.DateTimeField(auto_now=True, verbose_name="Güncellenme Tarihi")
-    
-    class Meta:
-        verbose_name = "SEO ve Sosyal Medya"
-        verbose_name_plural = "SEO ve Sosyal Medya"
-        ordering = ["-created_at"]
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-        super().save(*args, **kwargs)
-
-    def get_absolute_url(self):
-        return reverse("seo_detail", kwargs={"slug": self.slug})
-
-    def __str__(self):
-        return self.title

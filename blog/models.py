@@ -5,7 +5,7 @@ from ckeditor.fields import RichTextField
 class Blog(models.Model):
     title = models.CharField(max_length=200, verbose_name='Blog Başlığı')
     description = RichTextField(verbose_name='Açıklama')
-    image = models.ImageField(verbose_name='Blog Resmi')
+    image = models.ImageField(verbose_name='Blog Resmi', upload_to='blog_img')
     author = models.CharField(max_length=100, verbose_name='Blog Yazarı')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Oluşturulma Tarihi')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Güncellenme Tarihi')

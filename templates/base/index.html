@@ -113,7 +113,7 @@
                     <div class="funfact-content">
                         <div class="top-content">
                             <h3 class="sudtitle">{{ statistic_info.title }}</h3>
-                            <p class="text">{{ statistic_info.description }}</p>
+                            <p class="text">{{ statistic_info.description|safe }}</p>
                         </div>
                         <div class="funfact">
                             {% for item in statistics %}

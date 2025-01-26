@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'service.apps.ServiceConfig',
     'contact.apps.ContactConfig',
+    'seo.apps.SeoConfig',
     'admin_interface',
     'colorfield',
     'rest_framework',
@@ -93,7 +94,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 
 LANGUAGE_CODE = 'tr'
