@@ -11,7 +11,7 @@ from premailer import transform
 def send_blog_notification(sender, instance, created, **kwargs):
     if created:
         subject = f"Yeni bir blog yayınlandı: {instance.title}"
-        message = render_to_string('base/message.html', { 'instance': instance })
+        message = render_to_string('base/blog_message.html', { 'instance': instance })
 
         from_email = 'metin.qardasov2003@gmail.com'
         recipient_list = Subscribe.objects.values_list('email', flat=True)

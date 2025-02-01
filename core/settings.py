@@ -4,7 +4,6 @@ from os import getenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 SECRET_KEY = 'django-insecure-futhsy75_1@17l&max_a9d#b)k597*#mp9aj0(pdg9f$t2hsrb'
 
 DEBUG = True
@@ -26,6 +25,15 @@ INSTALLED_APPS = [
     'colorfield',
     'rest_framework',
     'ckeditor',
+    # 'jazzmin',
+    # 'semantic_admin',
+    # 'semantic_forms',
+    # 'unfold',
+    # 'unfold.contrib.filters',
+    # 'unfold.contrib.forms',
+    # 'unfold.contrib.inlines',
+    # 'unfold.contrib.import_export',
+    # 'unfold.contrib.guardian',
     'django.contrib.admin',
     'django_cleanup.apps.CleanupConfig',
 ]
@@ -71,12 +79,27 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 
 
+
+# if not DEBUG:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': getenv('POSTGRES_DB'),
+#             'USER': getenv('POSTGRES_USER'),
+#             'PASSWORD': getenv('POSTGRES_PASSWORD'),
+#             'HOST': getenv('POSTGRES_HOST'),
+#             'PORT': 5432,
+#         }
+# }
 
 
 
@@ -115,9 +138,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'metin.qardasov2003@gmail.com'
-EMAIL_HOST_PASSWORD = 'oplv bxmb wfka zxmi'
+EMAIL_BACKEND = getenv('EMAIL_BACKEND')
+EMAIL_HOST = getenv('EMAIL_HOST')
+EMAIL_PORT = getenv('EMAIL_PORT')
+EMAIL_USE_TLS = getenv('EMAIL_USE_TLS')
+EMAIL_HOST_USER = getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = getenv('EMAIL_HOST_PASSWORD')
