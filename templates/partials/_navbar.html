@@ -42,19 +42,19 @@
                                         <a class="{% if request.path == '/' %} active {% endif %}" style="{% if request.path == '/' %}color: #db9e2f{% endif %}" href="{% url 'base:index' %}">Ana Sayfa</a>
                                     </li>
                                     <li>
-                                        <a class="{% if request.path == '/about/' %} active {% endif %}" style="{% if request.path == '/about/' %} color: #db9e2f {% endif %}" href="{% url 'base:about' %}">Hakkımızda</a>
+                                        <a class="{% if request.path == '/hakkimizda/' %} active {% endif %}" style="{% if request.path == '/about/' %} color: #db9e2f {% endif %}" href="{% url 'base:about' %}">Hakkımızda</a>
                                     </li>
                                     <li>
-                                        <a class="{% if request.path|startswith:'/service/' %} active {% endif %}" style="{% if request.path|startswith:'/service/' %} color: #db9e2f {% endif %}" href="{% url 'service:services' %}">Servis</a>
+                                        <a class="{% if request.path|startswith:'/servis/' %} active {% endif %}" style="{% if request.path|startswith:'/service/' %} color: #db9e2f {% endif %}" href="{% url 'service:services' %}">Servis</a>
                                     </li>
                                     <li>
                                         <a class="{% if request.path|startswith:'/blog/' %} active {% endif %}" style="{% if request.path|startswith:'/blog/' %} color: #db9e2f {% endif %}" href="{% url 'blog:blogs' %}">Blog</a>
                                     </li>
                                     <li>
-                                        <a class="{% if request.path == '/galeries/' %} active {% endif %}" style="{% if request.path == '/galeries/' %} color: #db9e2f {% endif %}" href="{% url 'base:galeries' %}">Galeri</a>
+                                        <a class="{% if request.path == '/galeri/' %} active {% endif %}" style="{% if request.path == '/galeries/' %} color: #db9e2f {% endif %}" href="{% url 'base:galeries' %}">Galeri</a>
                                     </li>
                                     <li>
-                                        <a class="{% if request.path == '/contact/' %} active {% endif %}" style="{% if request.path == '/contact/' %} color: #db9e2f {% endif %}" href="{% url 'contact:contact' %}">İletişim</a>
+                                        <a class="{% if request.path == '/iletisim/' %} active {% endif %}" style="{% if request.path == '/contact/' %} color: #db9e2f {% endif %}" href="{% url 'contact:contact' %}">İletişim</a>
                                     </li>
                                 </ul>
                             </div>

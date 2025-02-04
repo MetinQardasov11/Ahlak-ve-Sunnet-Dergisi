@@ -3,38 +3,6 @@ from ckeditor.fields import RichTextField
 from django.utils.text import slugify
 from django.urls import reverse
 
-class TemplatePage(models.Model):
-    PAGE_CHOICES = [
-        ('base/index.html', 'Ana Sayfa'),
-        ('base/about.html', 'Hakkımızda'),
-        ('base/galery.html', 'Galeri'),
-        ('service/services.html', 'Hizmetler'),
-        ('service/service-details.html', 'Hizmet Detayları'),
-        ('blog/blogs.html', 'Blog'),
-        ('blog/blog-details.html', 'Blog Detayları'),
-        ('contact/contact.html', 'İletişim'),
-        ('base/404.html', '404 Sayfası'),
-    ]
-
-    url = models.CharField(max_length=255, unique=True, null=True, blank=True, verbose_name="Sayfanın URL yolu")
-    template_name = models.CharField(max_length=50, choices=PAGE_CHOICES, verbose_name="Sayfa türü")
-    title = models.CharField(max_length=255, verbose_name="Sayfanın başlığı")
-    description = models.TextField(blank=True, null=True, verbose_name="Sayfanın açıklaması")
-    is_active = models.BooleanField(default=True, verbose_name="Sayfanın aktif olup olmadığını belirler")
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Sayfanın oluşturulma tarihi")
-    updated_at = models.DateTimeField(auto_now=True, verbose_name="Sayfanın güncellenme tarihi")
-
-    def get_absolute_url(self):
-        return f"/{self.url}/"
-
-    def __str__(self):
-        return f"{self.template_name} ({self.url})"
-
-    class Meta:
-        verbose_name = "Sayfa"
-        verbose_name_plural = "Sayfalar"
-
-
 class GeneralItem(models.Model):
     title = models.CharField(max_length=200, verbose_name = "Genel Bilgi Başlığı")
     description = RichTextField(verbose_name = "Açıklama")

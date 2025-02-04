@@ -5,7 +5,7 @@ app_name = 'base'
 
 urlpatterns = [
     path('', index, name='index'),
-    path('about/', about, name='about'),
-    path('galeries/', galeries, name='galeries'),
-    path('error/', error, name='error'),
+    path('hakkimizda/', about, name='about'),
+    path('galeri/', galeries, name='galeries'),
+    path('hata/', error, name='error'),
 ]

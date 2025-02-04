@@ -2,12 +2,8 @@ from django.contrib import admin
 from .models import (
     GeneralItem, HomeSlider, About, 
     IslamCondition, Statistic, StatisticInfo,
-    Subscribe, Galery, PageBunner, TemplatePage
+    Subscribe, Galery, PageBunner
 )
-
-@admin.register(TemplatePage)
-class TemplatePageAdmin(admin.ModelAdmin):
-    list_display = ['url', 'template_name', 'is_active',]
 
 @admin.register(GeneralItem)
 class GeneralItemAdmin(admin.ModelAdmin):

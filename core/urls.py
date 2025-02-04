@@ -23,8 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('base.urls')),
     path('blog/', include('blog.urls')),
-    path('service/', include('service.urls')),
-    path('contact/', include('contact.urls')),
+    path('servis/', include('service.urls')),
+    path('iletisim/', include('contact.urls')),
 ]
 
 if settings.DEBUG:

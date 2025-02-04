@@ -20,7 +20,6 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'service.apps.ServiceConfig',
     'contact.apps.ContactConfig',
-    'seo.apps.SeoConfig',
     'admin_interface',
     'colorfield',
     'rest_framework',
