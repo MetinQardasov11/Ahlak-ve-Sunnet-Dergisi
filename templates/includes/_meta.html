@@ -1,9 +1,16 @@
 {% load static %}
 
-{% for tag in tags %}
-    <meta name="{{ tag.tag_type }}" content="{{ tag.content }}" />
-{% endfor %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-{% for social_tag in social_tags %}
-    <meta property="{{ social_tag.tag_type }}" content="{{ social_tag.content }}" />
-{% endfor %}
+    {% for tag in og_tags %}
+        <meta property="{{ tag.name }}" content="{{ tag.content }}">
+    {% endfor %}
+
+    {% for tag in twitter_tags %}
+        <meta name="{{ tag.name }}" content="{{ tag.content }}">
+    {% endfor %}
+
+    {% for tag in other_tags %}
+        <meta name="{{ tag.name }}" content="{{ tag.content }}">
+    {% endfor %}

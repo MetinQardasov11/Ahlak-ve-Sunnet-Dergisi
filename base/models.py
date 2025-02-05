@@ -153,3 +153,38 @@ class PageBunner(models.Model):
 
     class Meta:
         verbose_name_plural = "Sayfa Bannerları"
+        
+        
+
+class MetaTag(models.Model):
+    META_NAME_CHOICES = [
+        ("author", "Yazar"),
+        ("description", "Açıklama"),
+        ("keywords", "Anahtar Kelimeler"),
+        ("robots", "Robots"),
+        ("viewport", "Viewport"),
+        ("og:title", "Open Graph Başlığı"),
+        ("og:description", "Open Graph Açıklaması"),
+        ("og:image", "Open Graph Görseli"),
+        ("twitter:title", "Twitter Başlığı"),
+        ("twitter:description", "Twitter Açıklaması"),
+        ("twitter:image", "Twitter Görseli"),
+    ]
+    
+    page_name = models.CharField(max_length=255, help_text="Ana sayfa için boş bırakınız. Sayfa adı (örnek: Hakkımızda, Servis, Blog, Galeri, İletişim)", blank=True, null=True)
+    slug = models.SlugField(blank=True, null=True)
+    name = models.CharField(max_length=50, choices=META_NAME_CHOICES, help_text="Meta adı veya özelliği")
+    content = models.TextField(help_text="Meta tag içeriği (content)")
+    
+    def save(self, *args, **kwargs):
+        if not self.page_name:
+            self.slug = ""
+        if not self.slug or self.slug != slugify(self.page_name):
+            self.slug = slugify(self.page_name)
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"{self.page_name} - {self.name}"
+    
+    class Meta:
+        verbose_name_plural = "SEO"

@@ -1,5 +1,6 @@
 from .models import (
-    GeneralItem, About, PageBunner
+    GeneralItem, About, 
+    PageBunner, MetaTag
 )
 from django.contrib import messages
 from service.models import Service
@@ -8,9 +9,7 @@ from django.shortcuts import redirect
 from .forms import SubscribeForm
 
 def site_settings(request):
-    
     form = SubscribeForm(request.POST or None)
-    page_id = request.GET.get('page_id')
     
     if request.method == "POST" and form.is_valid():
         form.save()
@@ -22,6 +21,15 @@ def site_settings(request):
     last_6_services = Service.objects.all().order_by('-created_at')[:6]
     last_3_blogs = Blog.objects.all().order_by('-created_at')[:3]
     page_bunner = PageBunner.objects.first()
+    page_slug = request.path.strip("/").split("/")[0]
+    
+    if not page_slug:
+        page_slug = "none"
+    
+    meta_tags = MetaTag.objects.filter(slug=page_slug)
+    og_tags = [tag for tag in meta_tags if tag.name.startswith("og:")]
+    twitter_tags = [tag for tag in meta_tags if tag.name.startswith("twitter:")]
+    other_tags = [tag for tag in meta_tags if not tag.name.startswith(("og:", "twitter:"))]
     
     context = {
         'item' : general_item,
@@ -30,7 +38,10 @@ def site_settings(request):
         'form' : form,
         'last_6_services' : last_6_services,
         'last_3_blogs' : last_3_blogs,
-        'bunner' : page_bunner
+        'bunner' : page_bunner,
+        'og_tags': og_tags,
+        'twitter_tags': twitter_tags,
+        'other_tags': other_tags,
     }
     
     return context

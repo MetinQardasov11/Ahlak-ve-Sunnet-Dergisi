@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import (
     GeneralItem, HomeSlider, About, 
     IslamCondition, Statistic, StatisticInfo,
-    Subscribe, Galery, PageBunner
+    Subscribe, Galery, PageBunner, MetaTag
 )
 
 @admin.register(GeneralItem)
@@ -48,3 +48,9 @@ class GaleryAdmin(admin.ModelAdmin):
 @admin.register(PageBunner)
 class PageBunnerAdmin(admin.ModelAdmin):
     list_display = ('title', )
+    
+@admin.register(MetaTag)
+class MetaTagAdmin(admin.ModelAdmin):
+    list_display = ('page_name', 'name', 'content')
+    list_filter = ('page_name', 'name')
+    search_fields = ('page_name', 'name', 'content')
