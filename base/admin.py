@@ -2,13 +2,19 @@ from django.contrib import admin
 from .models import (
     GeneralItem, HomeSlider, About, 
     IslamCondition, Statistic, StatisticInfo,
-    Subscribe, Galery, PageBunner, MetaTag
+    Subscribe, Galery, PageBunner, MetaTag,
+    NavbarItem
 )
 
 @admin.register(GeneralItem)
 class GeneralItemAdmin(admin.ModelAdmin):
     list_display = ('title', 'nav_img', 'footer_img', 'favicon_img',)
 
+
+@admin.register(NavbarItem)
+class NavbarItemAdmin(admin.ModelAdmin):
+    list_display = ('title', 'url', 'order', 'is_active', 'position')
+    
     
 @admin.register(HomeSlider)
 class HomeSliderAdmin(admin.ModelAdmin):

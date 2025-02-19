@@ -20,8 +20,29 @@ class GeneralItem(models.Model):
         return self.title
     
     class Meta:
-        verbose_name_plural = "Genel Bilgiler"        
+        verbose_name_plural = "Genel Bilgiler"     
         
+        
+class NavbarItem(models.Model):
+    
+    POSITION_CHOICES = [
+        ('both', 'Her ikisi'),
+        ('navbar', 'Navbar'),
+        ('footer', 'Footer'),
+    ]
+    
+    title = models.CharField(max_length=100, verbose_name="Başlık")
+    url = models.CharField(max_length=200, verbose_name="URL")
+    order = models.IntegerField(default=0, verbose_name="Sıra")
+    is_active = models.BooleanField(default=True, verbose_name="Aktif mi?")
+    position = models.CharField(max_length=30, choices=POSITION_CHOICES, default='both', verbose_name="Menyu yeri", null=True, blank=True)
+        
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        ordering = ['order']
+        verbose_name_plural = "Navigasyon Menüsü"
 
 class HomeSlider(models.Model):
     title = models.CharField(max_length=200, verbose_name = "Slider Başlığı")

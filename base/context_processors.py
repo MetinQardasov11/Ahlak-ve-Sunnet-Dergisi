@@ -1,6 +1,6 @@
 from .models import (
     GeneralItem, About, 
-    PageBunner, MetaTag
+    PageBunner, MetaTag, NavbarItem
 )
 from django.contrib import messages
 from service.models import Service
@@ -30,6 +30,8 @@ def site_settings(request):
     og_tags = [tag for tag in meta_tags if tag.name.startswith("og:")]
     twitter_tags = [tag for tag in meta_tags if tag.name.startswith("twitter:")]
     other_tags = [tag for tag in meta_tags if not tag.name.startswith(("og:", "twitter:"))]
+    navbar_items = NavbarItem.objects.filter(is_active=True).filter(position__in=['both', 'navbar']).order_by('order')
+    footer_items = NavbarItem.objects.filter(is_active=True).filter(position__in=['both', 'footer']).order_by('order')
     
     context = {
         'item' : general_item,
@@ -42,6 +44,8 @@ def site_settings(request):
         'og_tags': og_tags,
         'twitter_tags': twitter_tags,
         'other_tags': other_tags,
+        'navbar_items': navbar_items,
+        'footer_items': footer_items,
     }
     
     return context

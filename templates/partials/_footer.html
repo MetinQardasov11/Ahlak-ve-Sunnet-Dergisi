@@ -60,25 +60,17 @@
               <h3>Hızlı Bağlantılar</h3>
             </div>
             <ul>
-              <li>
-                <a class="{% if request.path == '/' %} active {% endif %}" href="{% url 'base:index' %}">Ana Sayfa</a>
-              </li>
-              <li>
-                <a class="{% if request.path == '/hakkimizda/' %} active {% endif %}" href="{% url 'base:about' %}">Hakkımızda</a>
-              </li>
-              <li>
-                <a class="{% if request.path|startswith:'/servis/' %} active {% endif %}" href="{% url 'blog:blogs' %}">Hizmetler</a>
-              </li>
-              <li>
-                <a class="{% if request.path|startswith:'/blog/' %} active {% endif %}" href="{% url 'blog:blogs' %}">Blogler</a>
-              </li>
-              <li>
-                <a class="{% if request.path == '/galeri/' %} active {% endif %}" href="{% url 'service:services' %}">Galeri</a>
-              </li>
-              <li>
-                <a class="{% if request.path == '/iletisim/' %} active {% endif %}" href="{% url 'contact:contact' %}">İletişim</a>
-              </li>
+                {% for item in footer_items %}
+                    <li>
+                        <a class="{% if item.url in request.path %} active {% endif %}" 
+                        style="{% if item.url in request.path %} color: #db9e2f {% endif %}" 
+                        href="{{ item.url }}">
+                            {{ item.title }}
+                        </a>
+                    </li>
+                {% endfor %}
             </ul>
+
           </div>
         </div>
         <div class="col col-lg-3 col-md-6 col-sm-12 col-12">
