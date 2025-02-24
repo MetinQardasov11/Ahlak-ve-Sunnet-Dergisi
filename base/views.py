@@ -1,8 +1,9 @@
-from django.shortcuts import render
-from .models import HomeSlider, IslamCondition, StatisticInfo, Statistic, Galery
-from django.shortcuts import redirect
-from .forms import SubscribeForm
-from django.contrib import messages
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import (
+    HomeSlider, IslamCondition, 
+    StatisticInfo, Statistic, 
+    Galery, DynamicPage
+)
 from django.core.paginator import Paginator
 
 def index(request):

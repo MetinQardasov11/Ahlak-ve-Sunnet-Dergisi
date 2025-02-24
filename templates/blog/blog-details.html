@@ -5,22 +5,24 @@
 
 {% block content %}
 
-    <div class="wpo-breadcumb-area" style="background-image: url({{ bunner.blog_detail_img.url }})">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="wpo-breadcumb-wrap">
-                        <h2>{{ blog.title }}</h2>
-                        <ul>
-                            <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
-                            <li><a href="{% url 'blog:blogs' %}">Bloglar</a></li>
-                            <li><span>{{ blog.title }}</span></li>
-                        </ul>
+    {% if banners.blog_detail %}
+        <div class="wpo-breadcumb-area" style="background-image: url({{ banners.blog_detail.image }})">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="wpo-breadcumb-wrap">
+                            <h2>{{ blog.title }}</h2>
+                            <ul>
+                                <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
+                                <li><a href="{% url 'blog:blogs' %}">Bloglar</a></li>
+                                <li><span>{{ blog.title }}</span></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% endif %}
 
     <section class="wpo-blog-single-section wpo-blog-single-left-sidebar-section section-padding">
         <div class="container">

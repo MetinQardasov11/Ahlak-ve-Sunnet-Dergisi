@@ -1,6 +1,8 @@
 {% load static %}
 
-<link rel="shortcut icon" type="image/png" href="{{ item.favicon_img.url }}">
+{% if item.favicon_img %}
+    <link rel="shortcut icon" type="image/png" href="{{ item.favicon_img.url }}">
+{% endif %}
 <link href="{% static 'assets/css/themify-icons.css' %}" rel="stylesheet">
 <link href="{% static 'assets/css/flaticon.css' %}" rel="stylesheet">
 <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">

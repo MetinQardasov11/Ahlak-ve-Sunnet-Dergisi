@@ -1,37 +1,41 @@
 {% extends "partials/_base.html" %}
 {% load static %}
 
-{% block title %} Hakkımızda {% endblock %}
+{% block title %} {{ banners.about.title }} {% endblock %}
 
 {% block content %}
 
-    <div class="wpo-breadcumb-area" style="background-image: url({{ bunner.about_img.url }})">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="wpo-breadcumb-wrap">
-                        <h2>{{ bunner.about_title }}</h2>
-                        <ul>
-                            <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
-                            <li><span>{{ bunner.about_title }}</span></li>
-                        </ul>
+    {% if banners.about %}
+        <div class="wpo-breadcumb-area" style="background-image: url({{ banners.about.image }})">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="wpo-breadcumb-wrap">
+                            <h2>{{ banners.about.title }}</h2>
+                            <ul>
+                                <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
+                                <li><span>{{ banners.about.title }}</span></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% endif %}
 
+    
     <section class="about-section">
         <div class="container">
             <div class="wrap">
                 <div class="row justify-content-center align-items-center">
+                    {% if about.video %}
+                        <div class="col-12">
+                            <video loop="" muted="" autoplay="" playsinline="" width="100%" style="border-radius: 20px;">
+                                <source src="{{ about.video.url }}" type="video/mp4">
+                            </video>
+                        </div>
+                    {% endif %}
                     <div class="col-12">
-                        <video loop="" muted="" autoplay="" playsinline="" width="100%" style="border-radius: 20px;">
-                            <source src="{{ about.video.url }}" type="video/mp4">
-                        </video>
-                    </div>
-
-                     <div class="col-12">
                         <div class="content" style="padding: 25px 40px;">
                             <div class="section-title">
                                 <h2>Hakkımızda</h2>
@@ -46,37 +50,39 @@
         </div>
     </section>
 
-    <section class="pillars-section section-padding" style="background: url({% static 'assets/images/bg.png' %});">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-lg-6 col-md-8 col-12">
-                    <div class="section-title">
-                        <h2>İslamın Şartları</h2>
-                        <h3>İslamın 5 şartı var</h3>
+    {% if conditions %}
+        <section class="pillars-section section-padding" style="background: url({% static 'assets/images/bg.png' %});">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-8 col-12">
+                        <div class="section-title">
+                            <h2>İslamın Şartları</h2>
+                            <h3>İslamın 5 şartı var</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="pillars-wrap">
+                    <div class="pillars-slider">
+                        {% for item in conditions %}
+                            <div class="pillars-card {% if forloop.counter0|divisibleby:2 %}up-and-down-1{% else %}up-and-down-2{% endif %}">
+                                <div class="image">
+                                    <a href="{{ item.image.url }}" class="fancybox" data-fancybox-group="gall-1">
+                                        <img src="{{ item.image.url }}" style="height: 170px;" alt="pillars" class="img img-responsive">
+                                        <div class="popup-icon">
+                                            <i class="ti-plus"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <h2>
+                                    {{ item.title }}
+                                </h2>
+                            </div>
+                        {% endfor %}
+
                     </div>
                 </div>
             </div>
-            <div class="pillars-wrap">
-                <div class="pillars-slider">
-                    {% for item in conditions %}
-                        <div class="pillars-card {% if forloop.counter0|divisibleby:2 %}up-and-down-1{% else %}up-and-down-2{% endif %}">
-                            <div class="image">
-                                <a href="{{ item.image.url }}" class="fancybox" data-fancybox-group="gall-1">
-                                    <img src="{{ item.image.url }}" style="height: 170px;" alt="pillars" class="img img-responsive">
-                                    <div class="popup-icon">
-                                        <i class="ti-plus"></i>
-                                    </div>
-                                </a>
-                            </div>
-                            <h2>
-                                {{ item.title }}
-                            </h2>
-                        </div>
-                    {% endfor %}
-
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    {% endif %}
 
 {% endblock %}

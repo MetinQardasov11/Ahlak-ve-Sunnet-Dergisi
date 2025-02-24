@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import dynamic_page_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,6 +26,7 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('hizmetler/', include('service.urls')),
     path('iletisim/', include('contact.urls')),
+    path('<slug:slug>/', dynamic_page_view, name='dynamic_page'),
 ]
 
 if settings.DEBUG:

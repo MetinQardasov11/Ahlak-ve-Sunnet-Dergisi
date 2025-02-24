@@ -1,70 +1,80 @@
 {% extends "partials/_base.html" %}
 {% load static %}
 
-{% block title %} İletişim {% endblock %}
+{% block title %} {{ banners.contact.title }} {% endblock %}
 
 {% block content %}
 
-    <div class="wpo-breadcumb-area" style="background-image: url({{ bunner.contact_img.url }})">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="wpo-breadcumb-wrap">
-                        <h2>{{ bunner.contact_title }}</h2>
-                        <ul>
-                            <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
-                            <li><span>{{ bunner.contact_title }}</span></li>
-                        </ul>
+    {% if banners.contact %}
+        <div class="wpo-breadcumb-area" style="background-image: url({{ banners.contact.image }})">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="wpo-breadcumb-wrap">
+                            <h2>{{ banners.contact.title }}</h2>
+                            <ul>
+                                <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
+                                <li><span>{{ banners.contact.title }}</span></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% endif %}
 
     <section class="wpo-contact-pg-section section-padding">
         <div class="container">
             <div class="row">
                 <div class="col col-lg-10 offset-lg-1">
-                    <div class="office-info">
-                        <div class="row">
-                            <div class="col col-lg-10 offset-lg-1">
-                                <div class="office-info">
-                                    <div class="row">
-                                        <div class="col col-xl-6 col-lg-6 col-md-6 col-12">
-                                            <div class="office-info-item" style="height: 350px;">
-                                                <div class="office-info-icon">
-                                                    <div class="icon">
-                                                        <i class="fi flaticon-email" style="color: #DB9E2F;"></i>
+                    {% if emails or phones %}
+                        <div class="office-info">
+                            <div class="row">
+                                <div class="col col-lg-10 offset-lg-1">
+                                    <div class="office-info">
+                                        <div class="row">
+                                            {% if emails %}
+                                                <div class="col col-xl-6 col-lg-6 col-md-6 col-12">
+                                                    <div class="office-info-item" style="height: 350px;">
+                                                        <div class="office-info-icon">
+                                                            <div class="icon">
+                                                                <i class="fi flaticon-email" style="color: #DB9E2F;"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="office-info-text">
+                                                            <h2 style="font-size: 22px;">Email</h2>
+                                                            {% for email in emails %}
+                                                                <p>{{ email.email }}</p>
+                                                            {% endfor %}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="office-info-text">
-                                                    <h2 style="font-size: 22px;">Email</h2>
-                                                    {% for email in emails %}
-                                                        <p>{{ email.email }}</p>
-                                                    {% endfor %}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col col-xl-6 col-lg-6 col-md-6 col-12">
-                                            <div class="office-info-item" style="height: 350px;">
-                                                <div class="office-info-icon">
-                                                    <div class="icon">
-                                                        <i class="fi flaticon-phone-call" style="color: #DB9E2F;"></i></i>
+                                            {% endif %}
+
+                                            {% if phones %}
+                                                <div class="col col-xl-6 col-lg-6 col-md-6 col-12">
+                                                    <div class="office-info-item" style="height: 350px;">
+                                                        <div class="office-info-icon">
+                                                            <div class="icon">
+                                                                <i class="fi flaticon-phone-call" style="color: #DB9E2F;"></i></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="office-info-text">
+                                                            <h2 style="font-size: 22px;">Telefon Numaraları</h2>
+                                                            {% for phone in phones %}
+                                                                <p>{{ phone.phone }}</p>
+                                                            {% endfor %}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="office-info-text">
-                                                    <h2 style="font-size: 22px;">Telefon Numaraları</h2>
-                                                    {% for phone in phones %}
-                                                        <p>{{ phone.phone }}</p>
-                                                    {% endfor %}
-                                                </div>
-                                            </div>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {% endif %}
+
                     <div class="wpo-contact-title">
                         <h2>Sorularınızı bize bildirebilirsiniz. </h2>
                     </div>

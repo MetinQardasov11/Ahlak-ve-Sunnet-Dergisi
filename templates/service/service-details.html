@@ -5,22 +5,24 @@
 
 {% block content %}
 
-    <div class="wpo-breadcumb-area" style="background-image: url({{ bunner.service_detail_img.url }})">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="wpo-breadcumb-wrap">
-                        <h2>{{ service.title }}</h2>
-                        <ul>
-                            <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
-                            <li><a href="{% url 'service:services' %}">Hizmetler</a></li>
-                            <li><span>{{ service.title }}</span></li>
-                        </ul>
+    {% if banners.service_detail %}
+        <div class="wpo-breadcumb-area" style="background-image: url({{ banners.service_detail.image }})">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="wpo-breadcumb-wrap">
+                            <h2>{{ service.title }}</h2>
+                            <ul>
+                                <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
+                                <li><a href="{% url 'service:services' %}">Hizmetler</a></li>
+                                <li><span>{{ service.title }}</span></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% endif %}
 
     <section class="wpo-service-single-section section-padding">
         <div class="container">

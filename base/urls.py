@@ -1,5 +1,8 @@
 from django.urls import path
-from .views import index, about, galeries, error
+from .views import (
+    index, about, 
+    galeries, error,
+)
 
 app_name = 'base'
 

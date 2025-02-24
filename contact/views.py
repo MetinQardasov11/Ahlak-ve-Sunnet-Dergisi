@@ -7,7 +7,6 @@ def contact(request):
     
     if request.method == "POST":
         contact_form = ContactForm(request.POST)
-        print(contact_form)
         if contact_form.is_valid():
             contact_form.save()
             messages.success(request, "Mesajınız başarıyla gönderildi!")

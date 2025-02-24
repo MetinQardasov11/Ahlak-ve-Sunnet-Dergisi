@@ -9,7 +9,9 @@
                 <div class="loader-line-mask">
                     <div class="loader-line"></div>
                 </div>
-                <img src="{{ item.nav_img.url }}" alt="Logo" style="width: 80px; height: 80px; border-radius: 50%;">
+                {% if item.nav_img %}
+                    <img src="{{ item.nav_img.url }}" alt="Logo" style="width: 80px; height: 80px; border-radius: 50%;">
+                {% endif %}
             </div>
         </div>
     </div>
@@ -40,11 +42,9 @@
                                 <ul class="nav navbar-nav mb-2 mb-lg-0">
                                     {% for item in navbar_items %}
                                         <li>
-                                            <a class="{% if request.path == item.url or request.path == '/'|add:item.url %} active {% endif %}" 
-                                            style="{% if request.path == item.url or request.path == '/'|add:item.url %} color: #db9e2f {% endif %}" 
-                                            href="{{ item.url }}">
-                                                {{ item.title }}
-                                            </a>
+                                            <a class="{% if item.url == '/' and request.path == '/' or item.url != '/' and item.url in request.path %} active {% endif %}" 
+                                            style="{% if item.url == '/' and request.path == '/' or item.url != '/' and item.url in request.path %} color: #db9e2f {% endif %}" 
+                                            href="{{ item.url }}"> {{ item.title }} </a>
                                         </li>
                                     {% endfor %}
                                 </ul>

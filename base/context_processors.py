@@ -1,6 +1,7 @@
 from .models import (
     GeneralItem, About, 
-    PageBunner, MetaTag, NavbarItem
+    PageBanner, MetaTag, 
+    NavbarItem, DynamicPage
 )
 from django.contrib import messages
 from service.models import Service
@@ -20,18 +21,22 @@ def site_settings(request):
     last_3_services = Service.objects.all().order_by('-created_at')[:3]
     last_6_services = Service.objects.all().order_by('-created_at')[:6]
     last_3_blogs = Blog.objects.all().order_by('-created_at')[:3]
-    page_bunner = PageBunner.objects.first()
+    page_bunner = PageBanner.objects.first()
     page_slug = request.path.strip("/").split("/")[0]
     
     if not page_slug:
-        page_slug = "none"
+        page_slug = ""
     
     meta_tags = MetaTag.objects.filter(slug=page_slug)
     og_tags = [tag for tag in meta_tags if tag.name.startswith("og:")]
     twitter_tags = [tag for tag in meta_tags if tag.name.startswith("twitter:")]
     other_tags = [tag for tag in meta_tags if not tag.name.startswith(("og:", "twitter:"))]
+    
     navbar_items = NavbarItem.objects.filter(is_active=True).filter(position__in=['both', 'navbar']).order_by('order')
     footer_items = NavbarItem.objects.filter(is_active=True).filter(position__in=['both', 'footer']).order_by('order')
+    
+    banners = { banner.page: {'title': banner.title, 'image': banner.image.url if banner.image else None} for banner in PageBanner.objects.all() }
+    dynamic_pages = DynamicPage.objects.all()
     
     context = {
         'item' : general_item,
@@ -46,6 +51,8 @@ def site_settings(request):
         'other_tags': other_tags,
         'navbar_items': navbar_items,
         'footer_items': footer_items,
+        'banners': banners,
+        'dynamic_pages': dynamic_pages
     }
     
     return context

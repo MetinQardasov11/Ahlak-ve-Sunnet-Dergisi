@@ -14,7 +14,7 @@ services:
       - LC_ALL=C.UTF-8
 
   web:
-    container_name: AhlakveSunnetDergisi
+    container_name: ahlakvesunnetdergisi
     build: .
     restart: "always"
     ports:

@@ -17,10 +17,10 @@ class Contact(models.Model):
         
         
 class Address(models.Model):
-    title = models.CharField(max_length=200, verbose_name = "Adres Başlığı")
-    address = models.TextField(verbose_name = "Adres")
+    title = models.CharField(max_length=200, verbose_name = "Adres Başlığı", null=True, blank=True)
+    address = models.TextField(verbose_name = "Adres", null=True, blank=True)
     map = models.URLField(verbose_name = "Harita Linki", max_length=600, null=True, blank=True)
-    work_time = models.CharField(verbose_name="Açılıp kapanma saatleri", max_length=200)
+    work_time = models.CharField(verbose_name="Açılıp kapanma saatleri", max_length=200, null=True, blank=True)
     created_at = models.DateField(auto_now_add=True, verbose_name = "Oluşturulma Tarihi")
     updated_at = models.DateField(auto_now=True, verbose_name = "Güncellenme Tarihi")
 
@@ -32,26 +32,26 @@ class Address(models.Model):
     
     
 class Email(models.Model):
-    title = models.CharField(max_length=200, verbose_name = "Email Başlığı")
+    title = models.CharField(max_length=200, verbose_name = "Email Başlığı", null=True, blank=True)
     email = models.EmailField(verbose_name = "Email")
     created_at = models.DateField(auto_now_add=True, verbose_name = "Oluşturulma Tarihi")
     updated_at = models.DateField(auto_now=True, verbose_name = "Güncellenme Tarihi")
 
     def __str__(self):
-        return self.title
+        return self.email
     
     class Meta:
         verbose_name_plural = "Mailler"
     
     
 class Phone(models.Model):
-    title = models.CharField(max_length=200, verbose_name = "Telefon Başlığı")
+    title = models.CharField(max_length=200, verbose_name = "Telefon Başlığı", null=True, blank=True)
     phone = models.CharField(max_length=200, verbose_name = "Telefon")
     created_at = models.DateField(auto_now_add=True, verbose_name = "Oluşturulma Tarihi")
     updated_at = models.DateField(auto_now=True, verbose_name = "Güncellenme Tarihi")
 
     def __str__(self):
-        return self.title
+        return self.phone
     
     class Meta:
         verbose_name_plural = "Telefon Numraları"

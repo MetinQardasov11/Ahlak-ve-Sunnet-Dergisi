@@ -1,25 +1,27 @@
 {% extends "partials/_base.html" %}
 {% load static %}
 
-{% block title %} Error {% endblock %}
+{% block title %} {{ banners.error.title }} {% endblock %}
 
 {% block content %}
 
-    <div class="wpo-breadcumb-area" style="background-image: url({{ bunner.error_img.url }})">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="wpo-breadcumb-wrap">
-                        <h2>{{ bunner.error_title }}</h2>
-                        <ul>
-                            <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
-                            <li><span>{{ bunner.error_title }}</span></li>
-                        </ul>
+    {% if banners.error %}
+        <div class="wpo-breadcumb-area" style="background-image: url({{ banners.error.image }})">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="wpo-breadcumb-wrap">
+                            <h2>{{ banners.error.title }}</h2>
+                            <ul>
+                                <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
+                                <li><span>{{ banners.error.title }}</span></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% endif %}
 
     <section class="error-404-section section-padding">
         <div class="container">

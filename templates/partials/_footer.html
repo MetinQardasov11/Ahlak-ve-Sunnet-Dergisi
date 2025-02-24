@@ -1,14 +1,16 @@
 {% load static %}
 {% load custom_filters %}
 
-<footer class="site-footer">
+<footer class="site-footer mt-4">
   <div class="upper-footer">
     <div class="container">
       <div class="row">
-        <div class="col col-lg-3 col-md-6 col-sm-12 col-12">
+        <div class="col col-lg-4 col-md-6 col-sm-12 col-12">
           <div class="widget about-widget">
             <div class="logo widget-title">
-              <img src="{{ item.footer_img.url }}" width="80" class="img-fluid" style="border-radius: 20px;" alt="{{ item.title }}" />
+                {% if item.footer_img %}
+                    <img src="{{ item.footer_img.url }}" width="80" class="img-fluid" style="border-radius: 20px;" alt="{{ item.title }}" />
+                {% endif %}
             </div>
             <p>{{ item.description|safe }}</p>
             <div class="social-widget">
@@ -40,21 +42,7 @@
             </div>
           </div>
         </div>
-        <div class="col col-lg-3 col-md-6 col-sm-12 col-12">
-          <div class="widget link-widget">
-            <div class="widget-title">
-              <h3>Servisler</h3>
-            </div>
-            <ul>
-              {% for item in last_6_services %}
-                <li>
-                  <a href="{% url 'service:service_detail' item.slug %}">{{ item.title }}</a>
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-        <div class="col col-lg-3 col-md-6 col-sm-12 col-12">
+        <div class="col col-lg-4 col-md-6 col-sm-12 col-12">
           <div class="widget link-widget s2">
             <div class="widget-title">
               <h3>Hızlı Bağlantılar</h3>
@@ -62,18 +50,16 @@
             <ul>
                 {% for item in footer_items %}
                     <li>
-                        <a class="{% if item.url in request.path %} active {% endif %}" 
-                        style="{% if item.url in request.path %} color: #db9e2f {% endif %}" 
-                        href="{{ item.url }}">
-                            {{ item.title }}
-                        </a>
+                        <a class="{% if item.url == '/' and request.path == '/' or item.url != '/' and item.url in request.path %} active {% endif %}" 
+                        style="{% if item.url == '/' and request.path == '/' or item.url != '/' and item.url in request.path %} color: #db9e2f {% endif %}" 
+                        href="{{ item.url }}"> {{ item.title }} </a>
                     </li>
                 {% endfor %}
             </ul>
 
           </div>
         </div>
-        <div class="col col-lg-3 col-md-6 col-sm-12 col-12">
+        <div class="col col-lg-4 col-md-6 col-sm-12 col-12">
           <div class="widget newsletter-widget">
             <div class="widget-title">
               <h3>Abonel Ol</h3>
@@ -94,10 +80,12 @@
         <div class="col col-lg-6 col-12">
           <p class="text-center text-white mb-3">
             &copy;
-            <span style="color: #FED91F; font-weight: bolder">{{ item.title }}</span>
+            {% if item.title %}
+                <span style="color: #FED91F; font-weight: bolder">{{ item.title }}</span>
+            {% endif %}
             <script>
               document.write(new Date().getFullYear())
-            </script>Tüm hakları saklıdır.
+            </script> Tüm hakları saklıdır.
           </p>
         </div>
       </div>

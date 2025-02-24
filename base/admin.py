@@ -2,13 +2,13 @@ from django.contrib import admin
 from .models import (
     GeneralItem, HomeSlider, About, 
     IslamCondition, Statistic, StatisticInfo,
-    Subscribe, Galery, PageBunner, MetaTag,
-    NavbarItem
+    Subscribe, Galery, PageBanner, MetaTag,
+    NavbarItem, DynamicPage
 )
 
 @admin.register(GeneralItem)
 class GeneralItemAdmin(admin.ModelAdmin):
-    list_display = ('title', 'nav_img', 'footer_img', 'favicon_img',)
+    list_display = ('title',)
 
 
 @admin.register(NavbarItem)
@@ -51,12 +51,15 @@ class GaleryAdmin(admin.ModelAdmin):
     list_display = ('title', 'image',)
     
     
-@admin.register(PageBunner)
-class PageBunnerAdmin(admin.ModelAdmin):
-    list_display = ('title', )
+@admin.register(PageBanner)
+class PageBannerAdmin(admin.ModelAdmin):
+    list_display = ('page', 'title', 'image')
     
 @admin.register(MetaTag)
 class MetaTagAdmin(admin.ModelAdmin):
-    list_display = ('page_name', 'name', 'content')
-    list_filter = ('page_name', 'name')
+    list_display = ('page_name', 'name', 'slug',)
     search_fields = ('page_name', 'name', 'content')
+    
+@admin.register(DynamicPage)
+class DynamicPageAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug', 'banner_img', 'created_at')
