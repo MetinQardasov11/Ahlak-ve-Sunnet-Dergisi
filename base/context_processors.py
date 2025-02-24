@@ -1,7 +1,8 @@
 from .models import (
     GeneralItem, About, 
     PageBanner, MetaTag, 
-    NavbarItem, DynamicPage
+    NavbarItem, DynamicPage,
+    SocialMedia
 )
 from django.contrib import messages
 from service.models import Service
@@ -23,6 +24,7 @@ def site_settings(request):
     last_3_blogs = Blog.objects.all().order_by('-created_at')[:3]
     page_bunner = PageBanner.objects.first()
     page_slug = request.path.strip("/").split("/")[0]
+    social_medias = SocialMedia.objects.filter(is_active=True)
     
     if not page_slug:
         page_slug = ""
@@ -52,7 +54,8 @@ def site_settings(request):
         'navbar_items': navbar_items,
         'footer_items': footer_items,
         'banners': banners,
-        'dynamic_pages': dynamic_pages
+        'dynamic_pages': dynamic_pages,
+        'social_medias': social_medias,
     }
     
     return context

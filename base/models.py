@@ -3,18 +3,17 @@ from ckeditor.fields import RichTextField
 from django.utils.text import slugify
 from django.urls import reverse
 
-class GeneralItem(models.Model):
-    title = models.CharField(max_length=200, verbose_name = "Genel Bilgi Başlığı", null=True, blank=True)
+class DateModel(models.Model):
+    created_at = models.DateField(auto_now_add=True, verbose_name = "Oluşturulma Tarihi")
+    updated_at = models.DateField(auto_now=True, verbose_name = "Güncellenme Tarihi")
+
+
+class GeneralItem(DateModel):
+    title = models.CharField(max_length=200, verbose_name = "Site Ismi", null=True, blank=True)
     description = RichTextField(verbose_name = "Açıklama", blank=True, null=True)
     nav_img = models.ImageField(upload_to='nav_img', verbose_name = "Navigasyon Resmi", null=True, blank=True)
     footer_img = models.ImageField(upload_to='footer_img', verbose_name = "Footer Resmi", null=True, blank=True)
     favicon_img = models.ImageField(upload_to='favicon_img', verbose_name = "Favicon Resmi", null=True, blank=True)
-    facebook = models.URLField(verbose_name = "Facebook Linki", null=True, blank=True)
-    twitter = models.URLField(verbose_name = "Twitter Linki", max_length=600, null=True, blank=True)
-    instagram = models.URLField(verbose_name = "İnstagram Linki", max_length=600, null=True, blank=True)
-    youtube = models.URLField(verbose_name = "Youtube Linki", max_length=600, null=True, blank=True)
-    created_at = models.DateField(auto_now_add=True, verbose_name = "Oluşturulma Tarihi")
-    updated_at = models.DateField(auto_now=True, verbose_name = "Güncellenme Tarihi")
     
     def __str__(self):
         return self.title
@@ -23,7 +22,7 @@ class GeneralItem(models.Model):
         verbose_name_plural = "Genel Bilgiler"     
         
         
-class NavbarItem(models.Model):
+class NavbarItem(DateModel):
     
     POSITION_CHOICES = [
         ('both', 'Her ikisi'),
@@ -31,7 +30,7 @@ class NavbarItem(models.Model):
         ('footer', 'Footer'),
     ]
     
-    title = models.CharField(max_length=100, verbose_name="Başlık")
+    title = models.CharField(max_length=100, verbose_name="Başlık", blank=True, null=True)
     url = models.CharField(max_length=200, verbose_name="URL", blank=True, null=True)
     order = models.IntegerField(default=0, verbose_name="Sıra")
     is_active = models.BooleanField(default=True, verbose_name="Aktif mi?")
@@ -56,12 +55,11 @@ class NavbarItem(models.Model):
         ordering = ['order']
         verbose_name_plural = "Navigasyon Menüsü"
 
-class HomeSlider(models.Model):
+class HomeSlider(DateModel):
     title = models.CharField(max_length=200, verbose_name = "Slider Başlığı", blank=True, null=True)
     description = RichTextField(verbose_name = "Açıklama", blank=True, null=True)
     image = models.ImageField(upload_to='slider_img', verbose_name = "Slider Resmi", blank=True, null=True)
-    created_at = models.DateField(auto_now_add=True, verbose_name = "Oluşturulma Tarihi")
-    updated_at = models.DateField(auto_now=True, verbose_name = "Güncellenme Tarihi")
+    
 
     def __str__(self):
         return self.title
@@ -70,13 +68,12 @@ class HomeSlider(models.Model):
         verbose_name_plural = "Ana Sayfa Sliderları"
         
         
-class About(models.Model):
-    title = models.CharField(max_length=200, verbose_name = "Başlık")
-    description = RichTextField(verbose_name = "Açıklama")
+class About(DateModel):
+    title = models.CharField(max_length=200, verbose_name = "Başlık", blank=True, null=True)
+    description = RichTextField(verbose_name = "Açıklama", blank=True, null=True)
     image = models.ImageField(upload_to='about_img', verbose_name = "Resim", blank=True, null=True)
     video = models.FileField(upload_to='about_video', verbose_name = "Video", blank=True, null=True)
-    created_at = models.DateField(auto_now_add=True, verbose_name = "Oluşturulma Tarihi")
-    updated_at = models.DateField(auto_now=True, verbose_name = "Güncellenme Tarihi")
+    
 
     def __str__(self):
         return self.title
@@ -85,11 +82,10 @@ class About(models.Model):
         verbose_name_plural = "Hakkımızda"
         
         
-class IslamCondition(models.Model):
+class IslamCondition(DateModel):
     title = models.CharField(max_length=200, verbose_name = "Şart Başlığı")
     image = models.ImageField(upload_to='condition_img',verbose_name='Resim')
-    created_at = models.DateField(auto_now_add=True, verbose_name = "Oluşturulma Tarihi")
-    updated_at = models.DateField(auto_now=True, verbose_name = "Güncellenme Tarihi")
+    
 
     def __str__(self):
         return self.title
@@ -98,12 +94,11 @@ class IslamCondition(models.Model):
         verbose_name_plural = "İslamın Şartları"
         
         
-class StatisticInfo(models.Model):
+class StatisticInfo(DateModel):
     title = models.CharField(max_length=200, verbose_name = "Bilgi Başlığı", blank=True, null=True)
     description = RichTextField(verbose_name = "Açıklama", blank=True, null=True)   
     image = models.ImageField(upload_to='statistic_img', verbose_name='Resim', blank=True, null=True)
-    created_at = models.DateField(auto_now_add=True, verbose_name = "Oluşturulma Tarihi")
-    updated_at = models.DateField(auto_now=True, verbose_name = "Güncellenme Tarihi")
+    
     
     def __str__(self):
         return self.title
@@ -112,11 +107,10 @@ class StatisticInfo(models.Model):
         verbose_name_plural = "İstatistik için genel bilgiler"
         
         
-class Statistic(models.Model):
+class Statistic(DateModel):
     title = models.CharField(max_length=200, verbose_name = "Statistik Bilgi Başlığı", blank=True, null=True)
     value = models.IntegerField(verbose_name='Statistik Değer', blank=True, null=True)
-    created_at = models.DateField(auto_now_add=True, verbose_name = "Oluşturulma Tarihi")
-    updated_at = models.DateField(auto_now=True, verbose_name = "Güncellenme Tarihi")
+    
 
     def __str__(self):
         return self.title
@@ -125,11 +119,9 @@ class Statistic(models.Model):
         verbose_name_plural = "İstatistik Bilgileri"
         
         
-class Subscribe(models.Model):
+class Subscribe(DateModel):
     email = models.EmailField(verbose_name = "Email")
-    created_at = models.DateField(auto_now_add=True, verbose_name = "Oluşturulma Tarihi")
-    updated_at = models.DateField(auto_now=True, verbose_name = "Güncellenme Tarihi")
-
+    
     def __str__(self):
         return self.email
 
@@ -137,11 +129,9 @@ class Subscribe(models.Model):
         verbose_name_plural = "Aboneler"
         
         
-class Galery(models.Model):
+class Galery(DateModel):
     title = models.CharField(max_length=200, verbose_name = "Galeri Başlığı", blank=True, null=True)
     image = models.ImageField(upload_to='galery_img', verbose_name='Resim')
-    created_at = models.DateField(auto_now_add=True, verbose_name = "Oluşturulma Tarihi")
-    updated_at = models.DateField(auto_now=True, verbose_name = "Güncellenme Tarihi")
 
     def __str__(self):
         return self.title
@@ -150,7 +140,7 @@ class Galery(models.Model):
         verbose_name_plural = "Galeri"
         
         
-class PageBanner(models.Model):
+class PageBanner(DateModel):
     
     PAGE_CHOICES = [
         ('home', 'Ana Sayfa'),
@@ -168,8 +158,7 @@ class PageBanner(models.Model):
     title = models.CharField(max_length=200, verbose_name="Banner Başlığı", blank=True, null=True)
     image = models.ImageField(verbose_name="Banner Resmi", upload_to='banner', blank=True, null=True)
     
-    created_at = models.DateField(auto_now_add=True, verbose_name = "Oluşturulma Tarihi")
-    updated_at = models.DateField(auto_now=True, verbose_name = "Güncellenme Tarihi")
+    
 
     def __str__(self):
         return self.page
@@ -178,7 +167,7 @@ class PageBanner(models.Model):
         verbose_name_plural = "Sayfa Bannerları"
         
         
-class MetaTag(models.Model):
+class MetaTag(DateModel):
     META_NAME_CHOICES = [
         ("author", "Yazar"),
         ("description", "Açıklama"),
@@ -217,7 +206,8 @@ class MetaTag(models.Model):
     class Meta:
         verbose_name_plural = "SEO"
         
-class DynamicPage(models.Model):
+        
+class DynamicPage(DateModel):
     
     POSITION_CHOICES = [
         ('both', 'Her ikisi'),
@@ -229,8 +219,7 @@ class DynamicPage(models.Model):
     banner_img = models.ImageField(upload_to='dynamic_page_banner', verbose_name = "Banner", blank=True, null=True)
     content = RichTextField(verbose_name = "İçerik")
     slug = models.SlugField(unique=True, verbose_name = "URL", blank=True, null=True)
-    created_at = models.DateField(auto_now_add=True, verbose_name = "Oluşturulma Tarihi")
-    updated_at = models.DateField(auto_now=True, verbose_name = "Güncellenme Tarihi")
+    
     
     def __str__(self):
         return self.title
@@ -245,3 +234,16 @@ class DynamicPage(models.Model):
         
     class Meta:
         verbose_name_plural = "Dinamik Sayfalar"
+
+
+class SocialMedia(DateModel):
+    name = models.CharField(max_length=200, verbose_name = "Sosyal Medya Başlığı", blank=True, null=True)
+    url = models.CharField(max_length=200, verbose_name = "URL", blank=True, null=True)
+    icon = models.CharField(max_length=200, verbose_name = "Icon", blank=True, null=True, help_text="Font Awesome icon kullanınız.")
+    is_active = models.BooleanField(default=True, verbose_name = "Aktif mi?", blank=True, null=True)
+    
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name_plural = "Sosyal Medya"

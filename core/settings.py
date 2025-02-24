@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     # 'unfold.contrib.inlines',
     # 'unfold.contrib.import_export',
     # 'unfold.contrib.guardian',
+    'rosetta',
     'django.contrib.admin',
     'django_cleanup.apps.CleanupConfig',
 ]

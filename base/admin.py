@@ -3,7 +3,7 @@ from .models import (
     GeneralItem, HomeSlider, About, 
     IslamCondition, Statistic, StatisticInfo,
     Subscribe, Galery, PageBanner, MetaTag,
-    NavbarItem, DynamicPage
+    NavbarItem, DynamicPage, SocialMedia
 )
 
 @admin.register(GeneralItem)
@@ -63,3 +63,8 @@ class MetaTagAdmin(admin.ModelAdmin):
 @admin.register(DynamicPage)
 class DynamicPageAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'banner_img', 'created_at')
+    
+    
+@admin.register(SocialMedia)
+class SocialMediaAdmin(admin.ModelAdmin):
+    list_display = ('name', 'url', 'icon', 'is_active')
