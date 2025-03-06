@@ -1,19 +1,23 @@
 {% extends "partials/_base.html" %}
+{% load i18n %}
 {% load static %}
 
 {% block title %} {{ banners.about.title }} {% endblock %}
 
 {% block content %}
 
-    {% if banners.about %}
+    {% if banners.about.image %}
         <div class="wpo-breadcumb-area" style="background-image: url({{ banners.about.image }})">
+    {% else %}
+        <div class="wpo-breadcumb-area" style="background-image: url({% static 'assets/images/banner-default.png' %})">
+    {% endif %}
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <div class="wpo-breadcumb-wrap">
                             <h2>{{ banners.about.title }}</h2>
                             <ul>
-                                <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
+                                <li><a href="{% url 'base:index' %}">{% trans "Ana Sayfa" %}</a></li>
                                 <li><span>{{ banners.about.title }}</span></li>
                             </ul>
                         </div>
@@ -21,7 +25,6 @@
                 </div>
             </div>
         </div>
-    {% endif %}
 
     
     <section class="about-section">
@@ -38,7 +41,7 @@
                     <div class="col-12">
                         <div class="content" style="padding: 25px 40px;">
                             <div class="section-title">
-                                <h2>Hakkımızda</h2>
+                                <h2>{% trans "Hakkımızda" %}</h2>
                                 <h3>{{ about.title }}</h3>
                                 <p style="padding-right: 0px;">{{ about.description|safe }}</p>
                             </div>
@@ -56,8 +59,8 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-6 col-md-8 col-12">
                         <div class="section-title">
-                            <h2>İslamın Şartları</h2>
-                            <h3>İslamın 5 şartı var</h3>
+                            <h2>{% trans "İslamın Şartları" %}</h2>
+                            <h3>{% trans "İslamın 5 şartı var" %}</h3>
                         </div>
                     </div>
                 </div>

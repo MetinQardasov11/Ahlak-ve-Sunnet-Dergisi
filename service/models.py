@@ -4,9 +4,9 @@ from ckeditor.fields import RichTextField
 from PIL import Image
 
 class Service(models.Model):
-    title = models.CharField(max_length=255, verbose_name="Servis Başlığı")
-    description = RichTextField(verbose_name = "Açıklama")
-    image = models.ImageField(upload_to='service_img', verbose_name = "Resim")
+    title = models.CharField(max_length=255, verbose_name="Servis Başlığı", null=True, blank=True)
+    description = RichTextField(verbose_name = "Açıklama", null=True, blank=True)
+    image = models.ImageField(upload_to='service_img', verbose_name = "Resim", null=True, blank=True)
     slug = models.SlugField(null=True, blank=True, editable=False, verbose_name="Slug")
 
     created_at = models.DateField(auto_now_add=True, verbose_name = "Oluşturulma Tarihi")

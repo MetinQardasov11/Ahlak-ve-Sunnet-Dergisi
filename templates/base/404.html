@@ -1,42 +1,25 @@
 {% extends "partials/_base.html" %}
+{% load i18n %}
 {% load static %}
 
-{% block title %} {{ banners.error.title }} {% endblock %}
+{% block title %} 404 Sayfa Bulunamadı {% endblock %}
 
 {% block content %}
 
-    {% if banners.error %}
-        <div class="wpo-breadcumb-area" style="background-image: url({{ banners.error.image }})">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="wpo-breadcumb-wrap">
-                            <h2>{{ banners.error.title }}</h2>
-                            <ul>
-                                <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
-                                <li><span>{{ banners.error.title }}</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endif %}
+    <style>
+        footer {
+            display: none;
+        }
+    </style>
 
-    <section class="error-404-section section-padding">
+    <section class="error-404-section section-padding mt-5" style="background-image: url({% static 'assets/images/404.jpg' %}); background-size: cover; background-position: center center; height: 100vh; display: flex; justify-content: center; align-items: flex-end;">
         <div class="container">
             <div class="row">
                 <div class="col col-xs-12">
-                    <div class="content clearfix">
-                        <div class="error">
-                            <img src="{% static 'assets/images/error-404.png' %}" alt>
-                        </div>
-                        <div class="error-message">
-                            <h3>Oops! Page Not Found!</h3>
-                            <p>We’re sorry but we can’t seem to find the page you requested. This might be
-                                because
-                                you have typed the web address incorrectly.</p>
-                            <a href="{% url 'base:index' %}" class="theme-btn">Back to home</a>
+                    <div class="content clearfix" style="margin-top: -100px;">
+                        <h3 style="color: black; font-size: 36px; font-weight: bold;">{% trans "Ups! Sayfa Bulunamadı!" %}</h3>
+                        <div class="error-message" style="text-align: center; padding-bottom: 20px;">
+                            <a href="{% url 'base:index' %}" class="theme-btn" style="color: black; font-size: 18px;">{% trans "Ana Sayfaya Geri Dön" %}</a>
                         </div>
                     </div>
                 </div>

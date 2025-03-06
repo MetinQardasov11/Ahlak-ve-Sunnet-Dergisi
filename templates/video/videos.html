@@ -1,0 +1,114 @@
+{% extends "partials/_base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %} {{ playlist.playlist_name }} {% endblock %}
+
+{% block content %}
+
+    {% if banners.video.image %}
+        <div class="wpo-breadcumb-area" style="background-image: url({{ banners.video.image }})">
+    {% else %}
+        <div class="wpo-breadcumb-area" style="background-image: url({% static 'assets/images/banner-default.png' %})">
+    {% endif %}
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="wpo-breadcumb-wrap">
+                        <h2>{{ playlist.playlist_name }}</h2>
+                        <ul>
+                            <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
+                            <li><a href="{% url 'video:playlists' %}">{{ banners.playlist.title }}</a></li>
+                            <li><span>{{ playlist.playlist_name }}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="wpo-blog-pg-section section-padding">
+        <div class="container">
+            <h1 class="text-center mb-5" style="font-size: 70px;">{{ playlist.playlist_name }}</h1>
+            <div class="row">
+                {% if page_obj %}
+
+                    {% for video in page_obj %}
+                        <div class="col-lg-3 col-md-6 col-sm-12 mb-5" style="padding: 20px;">
+                            <a href="{% url 'video:video_detail' playlist_id=playlist.playlist_id video_id=video.video_id %}" style="text-decoration: none; color: inherit;">
+                                <div class="wpo-blog-content" style="border: 1px solid black; background-color: #fff; border-radius: 12px; box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); overflow: hidden; transition: all 0.3s ease; height: 320px;">
+                                    <div class="post format-standard-image">
+                                        <div class="entry-media" style="position: relative; overflow: hidden; border-bottom: 4px solid #f4f4f4;">
+                                            <img src="{{ video.thumbnail }}" class="img-fluid w-100" style="border-radius: 12px 12px 0 0; object-fit: cover; height: 200px; transition: transform 0.3s ease;" alt="{{ video.title }}">
+                                        </div>
+                                        <div class="entry-details mt-3 text-center" style="padding: 15px; background-color: #fafafa;">
+                                            <h6 style="font-size: 1.1rem; font-weight: bold; color: #333; line-height: 1.4; margin-bottom: 10px;">
+                                                <a href="{% url 'video:video_detail' playlist_id=playlist.playlist_id video_id=video.video_id %}" style="color: #333; text-decoration: none; font-weight: bold; transition: color 0.3s ease;">
+                                                    {{ video.title }}
+                                                </a>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                
+                {% else %}
+                    <div class="col-12">
+                        <div class="alert alert-warning" role="alert" style="background-color: #FFF3CD; color: #856404; border: 1px solid #ffeeba; padding: 15px; border-radius: 5px; font-size: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                            <i class="fa fa-exclamation-circle" style="margin-right: 10px; font-size: 20px;"></i> 
+                            Henüz video ilave olunmayıb
+                        </div>
+                    </div>
+                {% endif %}
+
+
+            </div>
+
+
+            <div class="pagination-wrapper">
+                <ul class="pg-pagination">
+                    {% if page_obj.has_previous %}
+                        <li>
+                            <a href="?page={{ page_obj.previous_page_number }}{% if selected_category %}&category={{ selected_category }}{% endif %}" aria-label="Previous">
+                                <i class="fi ti-angle-left"></i>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="disabled">
+                            <a href="#" aria-label="Previous">
+                                <i class="fi ti-angle-left"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <li class="active"><a href="#">{{ num }}</a></li>
+                        {% else %}
+                            <li>
+                                <a href="?page={{ num }}{% if selected_category %}&category={{ selected_category }}{% endif %}">{{ num }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li>
+                            <a href="?page={{ page_obj.next_page_number }}{% if selected_category %}&category={{ selected_category }}{% endif %}" aria-label="Next">
+                                <i class="fi ti-angle-right"></i>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="disabled">
+                            <a href="#" aria-label="Next">
+                                <i class="fi ti-angle-right"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

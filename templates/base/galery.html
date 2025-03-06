@@ -1,19 +1,23 @@
 {% extends "partials/_base.html" %}
+{% load i18n %}
 {% load static %}
 
 {% block title %} {{ banners.galery.title }} {% endblock %}
 
 {% block content %}
 
-    {% if banners.galery %}
+    {% if banners.galery.image %}
         <div class="wpo-breadcumb-area" style="background-image: url({{ banners.galery.image }})">
+    {% else %}
+        <div class="wpo-breadcumb-area" style="background-image: url({% static 'assets/images/banner-default.png' %})">
+    {% endif %}
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <div class="wpo-breadcumb-wrap">
                             <h2>{{ banners.galery.title }}</h2>
                             <ul>
-                                <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
+                                <li><a href="{% url 'base:index' %}">{% trans "Ana Sayfa" %}</a></li>
                                 <li><span>{{ banners.galery.title }}</span></li>
                             </ul>
                         </div>
@@ -21,7 +25,6 @@
                 </div>
             </div>
         </div>
-    {% endif %}
 
     <section class="gallery-images my-5">
         <div class="container my-5">
@@ -29,7 +32,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-12">
                     <div class="section-title">
-                        <h3 style="color: #DB9E2F;">Galeri</h3>
+                        <h3 style="color: #DB9E2F;">{% trans "Galeri" %}</h3>
                     </div>
                 </div>
             </div>
@@ -47,7 +50,7 @@
                 {% else %}
                     <div class="alert alert-warning" role="alert" style="background-color: #FFF3CD; color: #856404; border: 1px solid #ffeeba; padding: 15px; border-radius: 5px; font-size: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
                         <i class="fa fa-exclamation-circle" style="margin-right: 10px; font-size: 20px;"></i> 
-                        Henüz resim ilave olunmayıb
+                        {% trans "Henüz resim ilave olunmayıb" %}
                     </div>
                 {% endif %}
 

@@ -1,0 +1,117 @@
+{% extends "partials/_base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %} {{ banners.playlist.title }} {% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+
+    {% if banners.playlist.image %}
+        <div class="wpo-breadcumb-area" style="background-image: url({{ banners.playlist.image }})">
+    {% else %}
+        <div class="wpo-breadcumb-area" style="background-image: url({% static 'assets/images/banner-default.png' %})">
+    {% endif %}
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="wpo-breadcumb-wrap">
+                        <h2>{{ banners.playlist.title }}</h2>
+                        <ul>
+                            <li><a href="{% url 'base:index' %}">{% trans 'Ana Sayfa' %}</a></li>
+                            <li><span>{{ banners.playlist.title }}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="wpo-blog-pg-section section-padding">
+        <div class="container">
+            <h1 class="text-center mb-5" style="font-size: 70px;">{% trans 'Oynatma Listeleri' %}</h1>
+            <div class="row">
+                {% if page_obj %}
+
+                    {% for playlist in page_obj %}
+                        <div class="col-lg-3 col-md-6 col-sm-12 mb-5" style="padding: 20px;">
+                            <a href="{% url 'video:videos' playlist.playlist_id %}" style="text-decoration: none; color: inherit;">
+                                <div class="wpo-blog-content" style="border: 1px solid black; height: 320px;background-color: #fff; border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); overflow: hidden; transition: all 0.3s ease;">
+                                    <div class="post format-standard-image">
+                                        <div class="entry-media" style="position: relative; overflow: hidden; border-bottom: 4px solid #f4f4f4;">
+                                            <img src="{{ playlist.thumbnail }}" class="img-fluid w-100" style="border-radius: 12px 12px 0 0; object-fit: cover; height: 200px; transition: transform 0.3s ease;" alt="{{ playlist.playlist_name }}">
+                                        </div>
+                                        <div class="entry-details mt-3 text-center" style="padding: 15px; background-color: #fafafa;">
+                                            <h4 style="font-size: 1.6rem; font-weight: bold; color: #333; line-height: 1.4; margin-bottom: 10px;">
+                                                <a href="{% url 'video:videos' playlist.id %}" style="color: #333; text-decoration: none; font-weight: bold; transition: color 0.3s ease;">
+                                                    {{ playlist.playlist_name }}
+                                                </a>
+                                            </h4>
+                                            <p style="font-size: 0.9rem; color: #777; margin-bottom: 0; line-height: 1.5;">
+                                                {{ playlist.description|truncatewords:10 }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+
+                {% else %}
+                    <div class="col-12">
+                        <div class="alert alert-warning" role="alert" style="background-color: #FFF3CD; color: #856404; border: 1px solid #ffeeba; padding: 15px; border-radius: 5px; font-size: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                            <i class="fa fa-exclamation-circle" style="margin-right: 10px; font-size: 20px;"></i> 
+                            {% trans 'Henüz oynatma listesi ilave olunmayıb' %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="pagination-wrapper">
+                <ul class="pg-pagination">
+                    {% if page_obj.has_previous %}
+                        <li>
+                            <a href="?page={{ page_obj.previous_page_number }}{% if selected_category %}&category={{ selected_category }}{% endif %}" aria-label="Previous">
+                                <i class="fi ti-angle-left"></i>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="disabled">
+                            <a href="#" aria-label="Previous">
+                                <i class="fi ti-angle-left"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <li class="active"><a href="#">{{ num }}</a></li>
+                        {% else %}
+                            <li>
+                                <a href="?page={{ num }}{% if selected_category %}&category={{ selected_category }}{% endif %}">{{ num }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li>
+                            <a href="?page={{ page_obj.next_page_number }}{% if selected_category %}&category={{ selected_category }}{% endif %}" aria-label="Next">
+                                <i class="fi ti-angle-right"></i>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="disabled">
+                            <a href="#" aria-label="Next">
+                                <i class="fi ti-angle-right"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

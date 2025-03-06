@@ -1,0 +1,29 @@
+{% extends "partials/_base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %} Video Bulunamadı {% endblock %}
+
+{% block content %}
+
+    <style>
+        footer {
+            display: none;
+        }
+    </style>
+
+    <section class="error-404-section section-padding mt-5" style="background-image: url({% static 'assets/images/video-not-found.jpg' %}); background-size: cover; background-position: center center; height: 100vh; display: flex; justify-content: center; align-items: flex-end;">
+        <div class="container">
+            <div class="row">
+                <div class="col col-xs-12">
+                    <div class="content clearfix" style="margin-top: -100px;">
+                        <div class="error-message" style="text-align: center; padding-bottom: 20px;">
+                            <a href="{% url 'base:index' %}" class="theme-btn" style="color: black; font-size: 18px;">{% trans "Ana Sayfaya Geri Dön" %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

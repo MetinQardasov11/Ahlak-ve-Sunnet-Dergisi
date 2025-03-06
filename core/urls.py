@@ -1,33 +1,27 @@
-"""
-URL configuration for core project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import dynamic_page_view
+from django.conf.urls.i18n import i18n_patterns
+from django.utils.translation import gettext_lazy as _
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('base.urls')),
-    path('blog/', include('blog.urls')),
-    path('hizmetler/', include('service.urls')),
-    path('iletisim/', include('contact.urls')),
-    path('<slug:slug>/', dynamic_page_view, name='dynamic_page'),
+    # path('i18n/', include('django.conf.urls.i18n')),
 ]
+
+urlpatterns += i18n_patterns(
+    path('', include('base.urls', namespace='base')),
+    path('rosetta/', include('rosetta.urls')),
+    path('makaleler/', include('blog.urls', namespace='blog')),
+    path('playlist/', include('video.urls', namespace='video')),
+    path('hizmetler/', include('service.urls', namespace='service')),
+    path('iletisim/', include('contact.urls', namespace='contact')),
+    path('api/', include('video.api.urls')),
+    path('<slug:slug>/', dynamic_page_view, name='dynamic_page'),
+    prefix_default_language=False,
+)
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

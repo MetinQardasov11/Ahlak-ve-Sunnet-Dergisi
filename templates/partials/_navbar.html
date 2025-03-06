@@ -23,7 +23,9 @@
                     <div class="row align-items-center">
                         <div class="col-lg-2 col-md-6 col-6">
                             <div class="navbar-header" style="float: left;">
-                                <a class="navbar-brand" href="{% url 'base:index' %}"><img src="{{ item.nav_img.url }}" alt="logo" class="img-fluid" style="border-radius: 20px;" width="70"></a>
+                                {% if item.nav_img %}
+                                    <a class="navbar-brand" href="{% url 'base:index' %}"><img src="{{ item.nav_img.url }}" alt="logo" class="img-fluid" style="border-radius: 20px;" width="70"></a>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 col-6 d-lg-none dl-block">
@@ -39,14 +41,40 @@
                         <div class="col-lg-10 col-md-2 col-6 dl-block">
                             <div id="navbar" class="collapse navbar-collapse navigation-holder">
                                 <button class="menu-close"><i class="ti-close"></i></button>
-                                <ul class="nav navbar-nav mb-2 mb-lg-0">
+                                <ul class="nav navbar-nav mb-2 mb-lg-0 d-flex align-items-center">
                                     {% for item in navbar_items %}
-                                        <li>
-                                            <a class="{% if item.url == '/' and request.path == '/' or item.url != '/' and item.url in request.path %} active {% endif %}" 
-                                            style="{% if item.url == '/' and request.path == '/' or item.url != '/' and item.url in request.path %} color: #db9e2f {% endif %}" 
-                                            href="{{ item.url }}"> {{ item.title }} </a>
-                                        </li>
+                                        {% if current_language == "tr" %}
+                                            <li>
+                                                <a class="{% if item.url == '/' and request.path == '/' or item.url != '/' and item.url in request.path %} active {% endif %}" 
+                                                style="{% if item.url == '/' and request.path == '/' or item.url != '/' and item.url in request.path %} color: #db9e2f {% endif %}" 
+                                                href="{{ item.url }}"> {{ item.title }} </a>
+                                            </li>
+                                        {% else %}
+                                            <li>
+                                                <a class="{% if item.url == '/' and request.path == '/' or item.url != '/' and item.url in request.path %} active {% endif %}" 
+                                                style="{% if item.url == '/' and request.path == '/' or item.url != '/' and item.url in request.path %} color: #db9e2f {% endif %}" 
+                                                href="/{{ current_language }}{{ item.url }}"> {{ item.title }} </a>
+                                            </li>
+                                        {% endif %}
                                     {% endfor %}
+
+                                    
+                                    <li class="">
+                                        <a href="{% url 'base:set-language' current_language %}" style="display: flex; align-items: center; gap: 5px; padding: 8px 12px;  background-color: #db9e2f; color: white; border-radius: 5px;  text-decoration: none; font-weight: bold; transition: background 0.3s;">
+                                            {{ current_language|upper }} <i class="fas fa-chevron-down"></i>
+                                        </a>
+                                        <ul class="sub-menu" style="border: 1px solid black">
+                                            {% if current_language != "tr" %}
+                                                <li><a href="{% url 'base:set-language' 'tr' %}">TR</a></li>
+                                            {% endif %}
+                                            {% if current_language != "ar" %}
+                                                <li><a href="{% url 'base:set-language' 'ar' %}">AR</a></li>
+                                            {% endif %}
+                                            {% if current_language != "kk" %}
+                                                <li><a href="{% url 'base:set-language' 'kk' %}">KK</a></li>
+                                            {% endif %}
+                                        </ul>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

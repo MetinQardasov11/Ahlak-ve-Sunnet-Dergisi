@@ -1,19 +1,23 @@
 {% extends "partials/_base.html" %}
+{% load i18n %}
 {% load static %}
 
 {% block title %} {{ banners.contact.title }} {% endblock %}
 
 {% block content %}
 
-    {% if banners.contact %}
+    {% if banners.contact.image %}
         <div class="wpo-breadcumb-area" style="background-image: url({{ banners.contact.image }})">
+    {% else %}
+        <div class="wpo-breadcumb-area" style="background-image: url({% static 'assets/images/banner-default.png' %})">
+    {% endif %}
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <div class="wpo-breadcumb-wrap">
                             <h2>{{ banners.contact.title }}</h2>
                             <ul>
-                                <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
+                                <li><a href="{% url 'base:index' %}">{% trans 'Ana Sayfa' %}</a></li>
                                 <li><span>{{ banners.contact.title }}</span></li>
                             </ul>
                         </div>
@@ -21,7 +25,6 @@
                 </div>
             </div>
         </div>
-    {% endif %}
 
     <section class="wpo-contact-pg-section section-padding">
         <div class="container">
@@ -42,7 +45,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="office-info-text">
-                                                            <h2 style="font-size: 22px;">Email</h2>
+                                                            <h2 style="font-size: 22px;">{% trans 'Email' %}</h2>
                                                             {% for email in emails %}
                                                                 <p>{{ email.email }}</p>
                                                             {% endfor %}
@@ -60,7 +63,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="office-info-text">
-                                                            <h2 style="font-size: 22px;">Telefon Numaraları</h2>
+                                                            <h2 style="font-size: 22px;">{% trans 'Telefon Numaraları' %}</h2>
                                                             {% for phone in phones %}
                                                                 <p>{{ phone.phone }}</p>
                                                             {% endfor %}
@@ -76,7 +79,7 @@
                     {% endif %}
 
                     <div class="wpo-contact-title">
-                        <h2>Sorularınızı bize bildirebilirsiniz. </h2>
+                        <h2>{% trans 'Sorularınızı bize bildirebilirsiniz.' %} </h2>
                     </div>
                     <div class="wpo-contact-form-area" style="border: 1px solid #DB9E30; border-radius: 20px;">
                         
@@ -103,7 +106,7 @@
                                 {{ form.message.errors }}
                             </div>
                             <div class="submit-area mb-2">
-                                <button type="submit" class="theme-btn" style="margin-bottom: 30px;">Mesajı Gönder</button>
+                                <button type="submit" class="theme-btn" style="margin-bottom: 30px;">{% trans 'Mesajı Gönder' %}</button>
                             </div>
                         </form>
                     </div>
@@ -126,7 +129,7 @@
                         </div>
                         <div class="content-wrap">
                             <div class="content">
-                                <h2 class="title">Ahlak ve Sünnet Dergisi - <span style="color: #DB9E30;">{{ item.title }}</span></h2>
+                                <h2 class="title">{{ item.title }} - <span style="color: #DB9E30;">{{ item.title }}</span></h2>
                                 <ul>
                                     <li><img src="{% static 'assets/images/time.svg' %}" alt="icon">{{ item.work_time }}
                                     </li>

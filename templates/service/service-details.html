@@ -1,20 +1,24 @@
 {% extends "partials/_base.html" %}
+{% load i18n %}
 {% load static %}
 
 {% block title %} {{ service.title }} {% endblock %}
 
 {% block content %}
 
-    {% if banners.service_detail %}
+    {% if banners.service_detail.image %}
         <div class="wpo-breadcumb-area" style="background-image: url({{ banners.service_detail.image }})">
+    {% else %}
+        <div class="wpo-breadcumb-area" style="background-image: url({% static 'assets/images/banner-default.png' %})">
+    {% endif %}
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <div class="wpo-breadcumb-wrap">
                             <h2>{{ service.title }}</h2>
                             <ul>
-                                <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
-                                <li><a href="{% url 'service:services' %}">Hizmetler</a></li>
+                                <li><a href="{% url 'base:index' %}">{% trans 'Ana Sayfa' %}</a></li>
+                                <li><a href="{% url 'service:services' %}">{% trans 'Hizmetler' %}</a></li>
                                 <li><span>{{ service.title }}</span></li>
                             </ul>
                         </div>
@@ -22,7 +26,6 @@
                 </div>
             </div>
         </div>
-    {% endif %}
 
     <section class="wpo-service-single-section section-padding">
         <div class="container">
@@ -30,7 +33,11 @@
                 <div class="col-lg-8 col-md-12">
                     <div class="wpo-service-single-wrap">
                         <div class="wpo-service-single-content">
+                            {% if service.image %}
                             <img src="{{ service.image.url }}" style="border-radius: 20px;" alt="image" />
+                            {% else %}
+                            <img src="{% static 'assets/images/service-default.png' %}" alt="image" />
+                            {% endif %}
                             <div class="wpo-service-single-content-des">
                                 <h2>{{ service.title }}</h2>
                                 <p>{{ service.description|safe }}</p>
@@ -48,7 +55,7 @@
                 <div class="col-lg-4 col-md-8">
                     <div class="wpo-single-sidebar">
                         <div class="wpo-service-widget widget">
-                            <h2>All Services</h2>
+                            <h2>{% trans 'Tüm Hizmetler' %}</h2>
                             <ul class="wpo-service-widget">
                                 {% for item in services %}
                                     <li>

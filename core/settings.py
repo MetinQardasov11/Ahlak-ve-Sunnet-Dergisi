@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 from os import getenv
+from django.conf.global_settings import LANGUAGES as DJANGO_LANGUAGES
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,6 +20,7 @@ INSTALLED_APPS = [
     'base.apps.BaseConfig',
     'blog.apps.BlogConfig',
     'service.apps.ServiceConfig',
+    'video.apps.VideoConfig',
     'contact.apps.ContactConfig',
     'admin_interface',
     'colorfield',
@@ -34,6 +36,7 @@ INSTALLED_APPS = [
     # 'unfold.contrib.import_export',
     # 'unfold.contrib.guardian',
     'rosetta',
+    'modeltranslation',
     'django.contrib.admin',
     'django_cleanup.apps.CleanupConfig',
 ]
@@ -49,11 +52,13 @@ CKEDITOR_CONFIGS = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'base.middleware.TranslationMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -121,11 +126,30 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'tr'
 
-TIME_ZONE = 'Asia/Istanbul'
+USE_TZ = True
+
+USE_L10N = True
 
 USE_I18N = True
 
-USE_TZ = True
+TIME_ZONE = 'Asia/Istanbul'
+
+LANGUAGES = (
+    ('tr', 'Turkish'),
+    ('ar', 'Arabic'),
+    ('kk', 'Kurdish'),
+)
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale/',
+]
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'tr'
+MODELTRANSLATION_LANGUAGES = ['tr', 'ar', 'kk']
+MODELTRANSLATION_FALLBACK_LANGUAGES = {
+    'default': (),
+}
+
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
@@ -137,6 +161,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+API_KEY = "AIzaSyDfkOf5ukZEt5sGsXHg7qh6iXBd3L7pXIM"
+CHANNEL_ID = "UCn6c3M9iD_-i0twEX0r2V0g"
 
 EMAIL_BACKEND = getenv('EMAIL_BACKEND')
 EMAIL_HOST = getenv('EMAIL_HOST')

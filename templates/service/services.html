@@ -1,19 +1,23 @@
 {% extends "partials/_base.html" %}
+{% load i18n %}
 {% load static %}
 
 {% block title %} {{ banners.service.title }} {% endblock %}
 
 {% block content %}
 
-    {% if banners.service %}
+    {% if banners.service.image %}
         <div class="wpo-breadcumb-area" style="background-image: url({{ banners.service.image }})">
+    {% else %}
+        <div class="wpo-breadcumb-area" style="background-image: url({% static 'assets/images/banner-default.png' %})">
+    {% endif %}
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <div class="wpo-breadcumb-wrap">
                             <h2>{{ banners.service.title }}</h2>
                             <ul>
-                                <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
+                                <li><a href="{% url 'base:index' %}">{% trans 'Ana Sayfa' %}</a></li>
                                 <li><span>{{ banners.service.title }}</span></li>
                             </ul>
                         </div>
@@ -21,15 +25,14 @@
                 </div>
             </div>
         </div>
-    {% endif %}
 
     <section class="service-section-s2 section-padding">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-12">
                     <div class="section-title">
-                        <h2>Hizmetlerimiz</h2>
-                        <h3>İnsanlık için Hizmetlerimiz</h3>
+                        <h2>{% trans 'Hizmetlerimiz' %}</h2>
+                        <h3>{% trans 'İnsanlık için Hizmetlerimiz' %}</h3>
                     </div>
                 </div>
             </div>
@@ -48,10 +51,14 @@
                                     <div class="text">
                                         <h2>{{ item.title }}</h2>
                                         <p>{{ item.description|safe|truncatewords:10 }}</p>
-                                        <a href="{% url 'service:service_detail' item.slug %}">Daha Fazla...</a>
+                                        <a href="{% url 'service:service_detail' item.slug %}">{% trans 'Daha Fazla' %}...</a>
                                     </div>
                                     <div class="image">
+                                        {% if item.image %}
                                         <img src="{{ item.image.url }}" alt="image" />
+                                        {% else %}
+                                        <img src="{% static 'assets/images/service-default.png' %}" alt="image" />
+                                        {% endif %}
                                         <h2 class="img-title">{{ item.title }}</h2>
                                     </div>
                                 </div>
@@ -60,7 +67,7 @@
                     {% else %}
                         <div class="alert alert-warning" role="alert" style="background-color: #FFF3CD; color: #856404; border: 1px solid #ffeeba; padding: 15px; border-radius: 5px; font-size: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
                             <i class="fa fa-exclamation-circle" style="margin-right: 10px; font-size: 20px;"></i> 
-                            Henüz hizmet ilave olunmayıb
+                            {% trans 'Henüz hizmet ilave olunmayıb' %}
                         </div>
                     {% endif %}
                 </div>

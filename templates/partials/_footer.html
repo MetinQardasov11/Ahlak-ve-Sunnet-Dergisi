@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 {% load custom_filters %}
 
@@ -12,7 +13,7 @@
                     <img src="{{ item.footer_img.url }}" width="80" class="img-fluid" style="border-radius: 20px;" alt="{{ item.title }}" />
                 {% endif %}
             </div>
-            <p>{{ item.description|safe }}</p>
+            <p>{{ item.description|safe|truncatewords:50 }}</p>
             
             {% if social_medias %}
                 <div class="social-widget">
@@ -31,15 +32,23 @@
         <div class="col col-lg-4 col-md-6 col-sm-12 col-12">
           <div class="widget link-widget s2">
             <div class="widget-title">
-              <h3>Hızlı Bağlantılar</h3>
+              <h3>{% trans 'Hızlı Bağlantılar' %}</h3>
             </div>
             <ul>
-                {% for item in footer_items %}
-                    <li>
-                        <a class="{% if item.url == '/' and request.path == '/' or item.url != '/' and item.url in request.path %} active {% endif %}" 
-                        style="{% if item.url == '/' and request.path == '/' or item.url != '/' and item.url in request.path %} color: #db9e2f {% endif %}" 
-                        href="{{ item.url }}"> {{ item.title }} </a>
-                    </li>
+                {% for item in navbar_items %}
+                    {% if current_language == "tr" %}
+                        <li>
+                            <a class="{% if item.url == '/' and request.path == '/' or item.url != '/' and item.url in request.path %} active {% endif %}" 
+                            style="{% if item.url == '/' and request.path == '/' or item.url != '/' and item.url in request.path %} color: #db9e2f {% endif %}" 
+                            href="{{ item.url }}"> {{ item.title }} </a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a class="{% if item.url == '/' and request.path == '/' or item.url != '/' and item.url in request.path %} active {% endif %}" 
+                            style="{% if item.url == '/' and request.path == '/' or item.url != '/' and item.url in request.path %} color: #db9e2f {% endif %}" 
+                            href="/{{ current_language }}{{ item.url }}"> {{ item.title }} </a>
+                        </li>
+                    {% endif %}
                 {% endfor %}
             </ul>
 
@@ -48,12 +57,12 @@
         <div class="col col-lg-4 col-md-6 col-sm-12 col-12">
           <div class="widget newsletter-widget">
             <div class="widget-title">
-              <h3>Abonel Ol</h3>
+              <h3>{% trans 'Abone Ol' %}</h3>
             </div>
             <form action="{% url 'base:index' %}" method="post">
               {% csrf_token %}
               {{ form.email }}
-              <button type="submit" class="theme-btn">Abone ol</button>
+              <button type="submit" class="theme-btn">{% trans 'Abone ol' %}</button>
             </form>
           </div>
         </div>
@@ -71,7 +80,7 @@
             {% endif %}
             <script>
               document.write(new Date().getFullYear())
-            </script> Tüm hakları saklıdır.
+            </script> {% trans 'Tüm hakları saklıdır.' %}
           </p>
         </div>
       </div>

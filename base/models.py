@@ -1,7 +1,11 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.utils.text import slugify
-from django.urls import reverse
+from unidecode import unidecode
+from django.utils.translation import gettext_lazy as _
+from django.utils.translation import get_language
+from django.conf import settings
+from modeltranslation.utils import build_localized_fieldname
 
 class DateModel(models.Model):
     created_at = models.DateField(auto_now_add=True, verbose_name = "Oluşturulma Tarihi")
@@ -16,40 +20,50 @@ class GeneralItem(DateModel):
     favicon_img = models.ImageField(upload_to='favicon_img', verbose_name = "Favicon Resmi", null=True, blank=True)
     
     def __str__(self):
-        return self.title
+        current_language = get_language()
+        title = getattr(self, f"title_{current_language}", None)
+
+        if not title:
+            for lang_code, _ in settings.LANGUAGES:
+                title = getattr(self, f"title_{lang_code}", None)
+                if title:
+                    return title
+        
+        return "Henüz bir dilde tercüme bulunmuş deyil"
     
     class Meta:
         verbose_name_plural = "Genel Bilgiler"     
         
         
 class NavbarItem(DateModel):
-    
     POSITION_CHOICES = [
         ('both', 'Her ikisi'),
         ('navbar', 'Navbar'),
         ('footer', 'Footer'),
     ]
     
-    title = models.CharField(max_length=100, verbose_name="Başlık", blank=True, null=True)
+    title = models.CharField(max_length=100, verbose_name="Başlık", blank=True, null=True, help_text="Diller için tercüme yapın.")
     url = models.CharField(max_length=200, verbose_name="URL", blank=True, null=True)
     order = models.IntegerField(default=0, verbose_name="Sıra")
     is_active = models.BooleanField(default=True, verbose_name="Aktif mi?")
     position = models.CharField(max_length=30, choices=POSITION_CHOICES, default='both', verbose_name="Menyu yeri", null=True, blank=True)
     
     def save(self, *args, **kwargs):
-        if self.title.strip().lower().replace(" ", "") == "anasayfa":
-            self.url = "/"
-        else: 
-            if not self.url or self.url != slugify(self.title):
-                self.url = f"/{slugify(self.title)}/"
+        if self.title:
+            title_normalized = unidecode(self.title)
+            if title_normalized.strip().lower().replace(" ", "") == "anasayfa":
+                self.url = "/"
+            else:
+                slugified_title = slugify(title_normalized)
+                if not self.url or self.url != f"/{slugified_title}/":
+                    self.url = f"/{slugified_title}/"
         super().save(*args, **kwargs)
         
     def get_absolute_url(self):
         return f'/{self.url}'
-
         
     def __str__(self):
-        return self.title
+        return str(self.title)
     
     class Meta:
         ordering = ['order']
@@ -62,7 +76,7 @@ class HomeSlider(DateModel):
     
 
     def __str__(self):
-        return self.title
+        return str(self.title)
 
     class Meta:
         verbose_name_plural = "Ana Sayfa Sliderları"
@@ -76,19 +90,19 @@ class About(DateModel):
     
 
     def __str__(self):
-        return self.title
+        return str(self.title)
     
     class Meta:
         verbose_name_plural = "Hakkımızda"
         
         
 class IslamCondition(DateModel):
-    title = models.CharField(max_length=200, verbose_name = "Şart Başlığı")
-    image = models.ImageField(upload_to='condition_img',verbose_name='Resim')
+    title = models.CharField(max_length=200, verbose_name = "Şart Başlığı", blank=True, null=True)
+    image = models.ImageField(upload_to='condition_img',verbose_name='Resim', blank=True, null=True)
     
 
     def __str__(self):
-        return self.title
+        return str(self.title)
 
     class Meta:
         verbose_name_plural = "İslamın Şartları"
@@ -101,7 +115,7 @@ class StatisticInfo(DateModel):
     
     
     def __str__(self):
-        return self.title
+        return str(self.title)
     
     class Meta:
         verbose_name_plural = "İstatistik için genel bilgiler"
@@ -113,7 +127,7 @@ class Statistic(DateModel):
     
 
     def __str__(self):
-        return self.title
+        return str(self.title)
 
     class Meta:
         verbose_name_plural = "İstatistik Bilgileri"
@@ -134,7 +148,10 @@ class Galery(DateModel):
     image = models.ImageField(upload_to='galery_img', verbose_name='Resim')
 
     def __str__(self):
-        return self.title
+        if self.title:
+            return self.title
+        return "Resim"
+
 
     class Meta:
         verbose_name_plural = "Galeri"
@@ -147,8 +164,11 @@ class PageBanner(DateModel):
         ('about', 'Hakkımızda'),
         ('service', 'Hizmetler'),
         ('service_detail', 'Hizmet Detayları'),
-        ('blog', 'Bloglar'),
-        ('blog_detail', 'Blog Detayları'),
+        ('blog', 'Makaleler'),
+        ('blog_detail', 'Makele Detayları'),
+        ('playlist', 'Oynatma Listeleri'),
+        ('video', 'Videolar'),
+        ('video_detail', 'Video Detayları'),
         ('galery', 'Galeri'),
         ('contact', 'İletişim'),
         ('error', 'Error'),
@@ -156,9 +176,7 @@ class PageBanner(DateModel):
     
     page = models.CharField(max_length=20, choices=PAGE_CHOICES, unique=True, verbose_name="Sayfa", blank=True, null=True)
     title = models.CharField(max_length=200, verbose_name="Banner Başlığı", blank=True, null=True)
-    image = models.ImageField(verbose_name="Banner Resmi", upload_to='banner', blank=True, null=True)
-    
-    
+    image = models.ImageField(verbose_name="Banner Resmi", upload_to='banner', blank=True, null=True, help_text="Ana Sayfa, Videoalr ve detay sayfaları için boş bırakınız.")
 
     def __str__(self):
         return self.page
@@ -189,12 +207,13 @@ class MetaTag(DateModel):
     
     def save(self, *args, **kwargs):
         if self.page_name:
-            page_title = self.page_name.title.strip().lower().replace(" ", "")
+            title_text = self.page_name.title  # `title` sahəsini alırıq
+            title_normalized = unidecode(title_text)
             
-            if page_title == "anasayfa":
+            if title_normalized.strip().lower().replace(" ", "") == "anasayfa":
                 self.slug = ""
             else:
-                self.slug = slugify(page_title)
+                self.slug = slugify(title_normalized)
         else:
             self.slug = ""
         super().save(*args, **kwargs)
@@ -208,21 +227,13 @@ class MetaTag(DateModel):
         
         
 class DynamicPage(DateModel):
-    
-    POSITION_CHOICES = [
-        ('both', 'Her ikisi'),
-        ('navbar', 'Navbar'),
-        ('footer', 'Footer'),
-    ]
-    
-    title = models.CharField(max_length=200, verbose_name = "Sayfa Adı")
+    title = models.CharField(max_length=200, verbose_name = "Sayfa Adı", blank=True, null=True, help_text='Bu bölümü tercüme yapmayınız.')
     banner_img = models.ImageField(upload_to='dynamic_page_banner', verbose_name = "Banner", blank=True, null=True)
-    content = RichTextField(verbose_name = "İçerik")
+    content = RichTextField(verbose_name = "İçerik", blank=True, null=True, help_text='İçerik tercüme olunamlıdır eğer diğer dillerde varsa. Default dil türkçedir')
     slug = models.SlugField(unique=True, verbose_name = "URL", blank=True, null=True)
     
-    
     def __str__(self):
-        return self.title
+        return str(self.title)
     
     def save(self, *args, **kwargs):
         if not self.slug or self.slug != slugify(self.title):
@@ -239,7 +250,7 @@ class DynamicPage(DateModel):
 class SocialMedia(DateModel):
     name = models.CharField(max_length=200, verbose_name = "Sosyal Medya Başlığı", blank=True, null=True)
     url = models.CharField(max_length=200, verbose_name = "URL", blank=True, null=True)
-    icon = models.CharField(max_length=200, verbose_name = "Icon", blank=True, null=True, help_text="Font Awesome icon kullanınız.")
+    icon = models.CharField(max_length=200, verbose_name = "Icon", blank=True, null=True, help_text="Font Awesome icon class ismi kullanınız. Mesela (fa-brands fa-facebook)")
     is_active = models.BooleanField(default=True, verbose_name = "Aktif mi?", blank=True, null=True)
     
     def __str__(self):
@@ -247,3 +258,15 @@ class SocialMedia(DateModel):
     
     class Meta:
         verbose_name_plural = "Sosyal Medya"
+        
+        
+class Language(models.Model):
+    code = models.CharField(max_length=10, verbose_name = "Dil Kodu", blank=True, null=True)
+    name = models.CharField(max_length=50, verbose_name = "Dil Adı", blank=True, null=True)
+    is_active = models.BooleanField(default=True, verbose_name = "Aktif mi?", blank=True, null=True)
+    
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name_plural = "Diller"

@@ -33,7 +33,7 @@ class Address(models.Model):
     
 class Email(models.Model):
     title = models.CharField(max_length=200, verbose_name = "Email Başlığı", null=True, blank=True)
-    email = models.EmailField(verbose_name = "Email")
+    email = models.EmailField(verbose_name = "Email", null=True, blank=True)
     created_at = models.DateField(auto_now_add=True, verbose_name = "Oluşturulma Tarihi")
     updated_at = models.DateField(auto_now=True, verbose_name = "Güncellenme Tarihi")
 
@@ -46,7 +46,7 @@ class Email(models.Model):
     
 class Phone(models.Model):
     title = models.CharField(max_length=200, verbose_name = "Telefon Başlığı", null=True, blank=True)
-    phone = models.CharField(max_length=200, verbose_name = "Telefon")
+    phone = models.CharField(max_length=200, verbose_name = "Telefon", null=True, blank=True)
     created_at = models.DateField(auto_now_add=True, verbose_name = "Oluşturulma Tarihi")
     updated_at = models.DateField(auto_now=True, verbose_name = "Güncellenme Tarihi")
 

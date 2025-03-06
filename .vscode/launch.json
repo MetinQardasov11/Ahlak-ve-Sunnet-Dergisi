@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/metinqardasov/Desktop/Ahlak-ve-Sunnet-Dergisi/base",
+      "program": "/Users/metinqardasov/Desktop/Ahlak-ve-Sunnet-Dergisi/base/build/Debug/outDebug"
+    }
+  ]
+}

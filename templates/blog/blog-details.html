@@ -1,20 +1,24 @@
 {% extends "partials/_base.html" %}
+{% load i18n %}
 {% load static %}
 
 {% block title %} {{ blog.title }} {% endblock %}
 
 {% block content %}
 
-    {% if banners.blog_detail %}
+    {% if banners.blog_detail.image %}
         <div class="wpo-breadcumb-area" style="background-image: url({{ banners.blog_detail.image }})">
+    {% else %}
+        <div class="wpo-breadcumb-area" style="background-image: url({% static 'assets/images/blog-default.png' %})">
+    {% endif %}
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <div class="wpo-breadcumb-wrap">
                             <h2>{{ blog.title }}</h2>
                             <ul>
-                                <li><a href="{% url 'base:index' %}">Ana Sayfa</a></li>
-                                <li><a href="{% url 'blog:blogs' %}">Bloglar</a></li>
+                                <li><a href="{% url 'base:index' %}">{% trans 'Ana Sayfa' %}</a></li>
+                                <li><a href="{% url 'blog:blogs' %}">{% trans 'Bloglar' %}</a></li>
                                 <li><span>{{ blog.title }}</span></li>
                             </ul>
                         </div>
@@ -22,7 +26,6 @@
                 </div>
             </div>
         </div>
-    {% endif %}
 
     <section class="wpo-blog-single-section wpo-blog-single-left-sidebar-section section-padding">
         <div class="container">
@@ -31,11 +34,17 @@
                     <div class="wpo-blog-content">
                         <div class="post format-standard-image">
                             <div class="entry-media">
-                                <img src="{{ blog.image.url }}" style="border-radius: 20px;" alt>
+                                {% if blog.image %}
+                                    <img src="{{ blog.image.url }}" style="border-radius: 20px;" alt>
+                                {% else %}
+                                    <img src="{% static 'assets/images/blog-default.png' %}" style="border-radius: 20px; height: 550px;" alt>
+                                {% endif %}
                             </div>
                             <div class="entry-meta">
                                 <ul>
-                                    <li><i class="fi flaticon-user"></i>{{ blog.author }} </li>
+                                    {% if blog.author %}
+                                        <li><i class="fi flaticon-user"></i>{{ blog.author }} </li>
+                                    {% endif %}
                                     <li><i class="fi flaticon-calendar"></i>{{ blog.created_at|date:"d M Y" }}</li>
                                 </ul>
                             </div>
@@ -44,12 +53,11 @@
 
                             <div class="gallery" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
                                 {% for image in blog.images.all %}
-                                <div class="gallery-item" style="width: 100%; overflow: hidden;">
-                                    <img src="{{ image.image.url }}" alt="" style="width: 100%; height: 350px;">
-                                </div>
+                                    <div class="gallery-item" style="width: 100%; overflow: hidden;">
+                                        <img src="{{ image.image.url }}" alt="" style="width: 100%; height: 350px;">
+                                    </div>
                                 {% endfor %}
                             </div>
-
                         </div>
                     </div>
                 </div>

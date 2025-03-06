@@ -1,4 +1,5 @@
 {% extends "partials/_base.html" %}
+{% load i18n %}
 {% load static %}
 
 {% block title %} {{ banners.home.title }} {% endblock %}
@@ -10,7 +11,11 @@
             <div class="swiper-wrapper">
                 {% for item in sliders %}
                     <div class="swiper-slide">
+                        {% if item.image %}
                         <div class="slide-inner slide-bg-image" data-background="{{ item.image.url }}">
+                        {% else %}
+                        <div class="slide-inner slide-bg-image" data-background="{% static 'assets/images/slider-default.png' %}">
+                        {% endif %}
                             <div class="container">
                                 <div class="slide-content">
                                     <div data-swiper-parallax="300" class="slide-title">
@@ -21,7 +26,7 @@
                                     </div>
                                     <div class="clearfix"></div>
                                     <div data-swiper-parallax="500" class="slide-btns">
-                                        <a href="{% url 'base:about' %}" class="theme-btn">Daha Fazlası</a>
+                                        <a href="{% url 'base:about' %}" class="theme-btn">{% trans "Daha Fazlası" %}</a>
                                     </div>
                                 </div>
                             </div>
@@ -42,18 +47,22 @@
                 <div class="wrap">
                     <div class="row align-items-lg-center">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            {% if about.image %}
                             <img src="{{ about.image.url }}" style="border-radius: 30px;" alt="">
+                            {% else %}
+                            <img src="{% static 'assets/images/logo.jpg' %}" style="border-radius: 30px;" alt="">
+                            {% endif %}
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="content" style="padding: 25px 40px;">
                                 <div class="section-title">
-                                    <h2>Hakkımızda</h2>
+                                    <h2>{% trans "Hakkımızda" %}</h2>
                                     <h3>{{ about.title }}</h3>
                                     <p style="padding-right: 0px;">{{ about.description|safe|truncatewords:50 }}</p>
                                 </div>
                                 <div class="about-bottom d-flex justify-content-center">
-                                    <a href="{% url 'base:about' %}" class="theme-btn">Daha Fazlası</a>
+                                    <a href="{% url 'base:about' %}" class="theme-btn">{% trans "Daha Fazlası" %}</a>
                                 </div>
                             </div>
                         </div>
@@ -70,8 +79,8 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-7 col-12">
                         <div class="section-title">
-                            <h2>Servislerimiz</h2>
-                            <h3>Hizmetlerimiz</h3>
+                            <h2>{% trans 'Servislerimiz' %}</h2>
+                            <h3>{% trans 'Servislerimiz' %}</h3>
                         </div>
                     </div>
                 </div>
@@ -89,10 +98,14 @@
                                     <div class="text">
                                         <h2>{{ item.title }}</h2>
                                         <p>{{ item.description|safe|truncatewords:10 }}</p>
-                                        <a href="{% url 'service:service_detail' item.slug %}">Daha Fazla...</a>
+                                        <a href="{% url 'service:service_detail' item.slug %}">{% trans 'Daha Fazla' %}...</a>
                                     </div>
                                     <div class="image">
+                                        {% if item.image %}
                                         <img src="{{ item.image.url }}" alt="image" />
+                                        {% else %}
+                                        <img src="{% static 'assets/images/service-default.png' %}" alt="image" />
+                                        {% endif %}
                                         <h2 class="img-title">{{ item.title }}</h2>
                                     </div>
                                 </div>
@@ -102,7 +115,7 @@
                     </div>
                     <div class="d-flex justify-content-center mt-3 mb-5">
                     <a href="{% url 'service:services' %}" class="theme-btn" style="background: #DB9E2F; color: #fff; padding: 12px 40px; border-radius: 25px; text-transform: uppercase; text-decoration: none; font-weight: bold; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
-                        Daha Fazlası
+                        {% trans 'Daha Fazlası' %}
                     </a>
                 </div>
                 </div>
@@ -111,7 +124,11 @@
     {% endif %}
 
     {% if statistic_info%}
+        {% if statistic_info.image %}
         <section class="funfact-section section-padding" style="border-bottom: 3px solid #E8C960; background-image: url({{ statistic_info.image.url }}); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        {% else %}
+        <section class="funfact-section section-padding" style="border-bottom: 3px solid #E8C960; background-image: url({% static 'assets/images/bg.png' %}); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        {% endif %}
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-md-10 col-12">
@@ -128,7 +145,7 @@
                                     </div>
                                 {% endfor %}
                             </div>
-                            <a href="{% url 'base:about' %}" class="theme-btn">Hakkımızda</a>
+                            <a href="{% url 'base:about' %}" class="theme-btn">{% trans 'Hakkımızda' %}</a>
                         </div>
                     </div>
                 </div>
@@ -150,15 +167,21 @@
                     {% for blog in last_3_blogs %}
                         <div class="col-lg-4 col-md-6 col-sm-12" style="margin-bottom: 30px;">
                             <a href="{% url 'blog:blog_detail' blog.slug %}" style="text-decoration: none;">
-                                <div class="wpo-blog-content" style="background: #fff; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; hover: transform: scale(1.05);">
+                                <div class="wpo-blog-content" style="border: 1px solid #E8C960; background: #fff; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; hover: transform: scale(1.05);">
                                     <div class="post format-standard-image">
-                                        <div class="entry-media" style="overflow: hidden; position: relative;">
-                                            <img src="{{ blog.image.url }}" class="img-fluid" style="border-radius: 15px 15px 0 0; transition: transform 0.3s ease; width: 100%; height: 250px;" alt>
-                                        </div>
-                                        <div class="entry-details" style="padding: 20px; text-align: center; height: 250px;">
+                                        {% if blog.image %}
+                                            <div class="entry-media" style="overflow: hidden; position: relative;">
+                                                <img src="{{ blog.image.url }}" class="img-fluid" style="border-radius: 15px 15px 0 0; transition: transform 0.3s ease; width: 100%; height: 250px;" alt>
+                                            </div>
+                                        {% else %}
+                                            <div class="entry-media" style="overflow: hidden; position: relative;">
+                                                <img src="{% static 'assets/images/blog-default.png' %}" class="img-fluid" style="border-radius: 15px 15px 0 0; transition: transform 0.3s ease; width: 100%; height: 250px;" alt>
+                                            </div>
+                                        {% endif %}
+                                        <div class="entry-details" style="padding: 20px; text-align: center; height: 170px;">
                                             <h4 style="font-size: 18px; color: #333; font-weight: bold;"><a href="{% url 'blog:blog_detail' blog.slug %}" style="color: #333; text-decoration: none;">{{ blog.title }}</a></h4>
-                                            <p style="font-size: 14px; color: #666; margin-top: 10px;">{{ blog.description|safe|truncatewords:15 }}</p>
-                                            <a href="{% url 'blog:blog_detail' blog.slug %}" class="read-more" style="color: #E8C960; font-weight: bold; text-transform: uppercase; text-decoration: none;">Daha Fazlası ...</a>
+                                            <p style="font-size: 14px; color: #666; margin-top: 10px;">{{ blog.description|safe|truncatechars:10 }}</p>
+                                            <a href="{% url 'blog:blog_detail' blog.slug %}" class="read-more" style="color: #E8C960; font-weight: bold; text-transform: uppercase; text-decoration: none;">{% trans 'Daha Fazlası' %} ...</a>
                                         </div>
                                     </div>
                                 </div>
@@ -168,7 +191,7 @@
                 </div>
                 <div class="d-flex justify-content-center mt-3 mb-5">
                     <a href="{% url 'blog:blogs' %}" class="theme-btn" style="background: #DB9E2F; color: #fff; padding: 12px 40px; border-radius: 25px; text-transform: uppercase; text-decoration: none; font-weight: bold; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
-                        Daha Fazlası
+                        {% trans 'Daha Fazlası' %}
                     </a>
                 </div>
             </div>
