@@ -1,5 +1,5 @@
 from django.utils.translation import get_language
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import NavbarItem
 
 class TranslationMiddleware:
@@ -20,6 +20,6 @@ class TranslationMiddleware:
         if NavbarItem.objects.filter(url=f"/{route}/").exists():
             navbar_item = NavbarItem.objects.get(url=f"/{route}/")
             if not getattr(navbar_item, title_field, None):
-                return render(request, "base/404.html", status=404)
+                return redirect('base:index')
 
         return response

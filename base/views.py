@@ -13,7 +13,6 @@ from .models import (
     StatisticInfo, Statistic, 
     Galery
 )
-from video.utils import fetch_channels, fetch_youtube_data
 
 def index(request):
     user_language = get_language()
@@ -52,9 +51,6 @@ def galeries(request):
     
     return render(request, 'base/galery.html', context)
 
-
-def error(request):
-    return render(request, 'base/404.html')
 
 
 def set_language(request, language):

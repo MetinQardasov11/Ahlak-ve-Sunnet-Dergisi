@@ -10,10 +10,10 @@ def playlists(request):
     
     playlists = Playlist.objects.filter(is_active=True)
 
-    # if selected_language_code:
-    #     language = Language.objects.filter(code=selected_language_code).first()
-    #     if language:
-    #         playlists = playlists.filter(languages=language)
+    if selected_language_code:
+        language = Language.objects.filter(code=selected_language_code).first()
+        if language:
+            playlists = playlists.filter(languages=language)
 
     paginator = Paginator(playlists, 12)
     page_number = request.GET.get('page', 1)
@@ -35,14 +35,11 @@ def videos(request, playlist_id):
     selected_language_code = request.GET.get('language', current_language)
     videos = Video.objects.filter(playlist=playlist)
     
-    # if selected_language_code:
-    #     language = Language.objects.filter(code=selected_language_code).first()
-    #     if language:
-    #         videos = videos.filter(languages=language)
-
-    # if not videos.exists():
-    #     return redirect('base:video_not_found')
-
+    if selected_language_code:
+        language = Language.objects.filter(code=selected_language_code).first()
+        if language:
+            videos = videos.filter(languages=language)
+    
     paginator = Paginator(videos, 12)
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
@@ -78,7 +75,3 @@ def video_detail(request, playlist_id, video_id):
         'random_videos': random_videos
     }
     return render(request, 'video/video-details.html', context)
-
-
-def video_not_found(request):
-    return render(request, 'video/video-not-found.html')
