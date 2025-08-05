@@ -1,4 +1,4 @@
-name: Deploy Grelo
+name: Deploy AhlakSUnnetDergisi
 
 on:
   push:
