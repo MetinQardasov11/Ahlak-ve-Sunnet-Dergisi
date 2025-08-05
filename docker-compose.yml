@@ -5,20 +5,22 @@ services:
     container_name: postgres-db
     image: postgres:13-alpine
     restart: always
-    ports:
-      - 5432:5432
+#    ports:
+#      - 5432:5432
     volumes:
       - ./pgdb:/var/lib/postgresql/data
     env_file: .env
     environment:
       - LC_ALL=C.UTF-8
+    networks:
+      - nginx-proxy
 
-  web:
+  web_ahlak:
     container_name: ahlakvesunnetdergisi
     build: .
     restart: "always"
     ports:
-      - "8000:8000"
+      - "8050:8000"
     volumes:
       - .:/code
       - ./static/:/code/static/
@@ -28,8 +30,9 @@ services:
     env_file: .env
     depends_on:
       - db
+    networks:
+      - nginx-proxy
 
 networks:
-  default:
-    external:
-      name: nginx-proxy
+  nginx-proxy:
+    external: true
