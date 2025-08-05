@@ -76,3 +76,16 @@ dmypy.json
 .pytype/
 cython_debug/
 media/
+
+# Custom for ahlak
+
+# Docker volumes (DB and persistent stuff)
+volumes/
+
+# Certbot SSL certs inside config
+config/certbot/
+
+# Static and media
+staticfiles/
+staticfiles_ahlak/
+media/
