@@ -1,0 +1,32 @@
+name: Deploy Grelo
+
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Deploy with Docker Compose
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            cd /root/Ahlak-ve-Sunnet-Dergisi
+            git fetch origin
+            git pull --rebase origin master
+            docker compose down
+            docker compose up -d --build
+            docker exec -it web_ahlak 
+            docker compose exec web_ahlak python manage.py makemigrations
+            docker compose exec web_ahlak python manage.py migrate
+            docker compose exec web_ahlak python manage.py collectstatic --noinput
+          EOF
