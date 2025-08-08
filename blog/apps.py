@@ -6,5 +6,5 @@ class BlogConfig(AppConfig):
     name = 'blog'
     verbose_name = "Makaleler"
     
-    def ready(self):
-        import blog.signals
+    # def ready(self):
+    #     import blog.signals
