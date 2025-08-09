@@ -11,7 +11,7 @@ environ.Env.read_env(BASE_DIR / '.env')
 
 SECRET_KEY = 'django-insecure-futhsy75_1@17l&max_a9d#b)k597*#mp9aj0(pdg9f$t2hsrb'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [ 'islamhayatdergisi.com']
 
