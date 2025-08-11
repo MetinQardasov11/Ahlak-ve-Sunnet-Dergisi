@@ -18,7 +18,7 @@ class BlogCategoryAdmin(TabbedTranslationAdmin):
     
 
 
-class BlogImageInline(TranslationStackedInline):
+class BlogImageInline(admin.TabularInline):
     model = BlogImage
     extra = 1
     class Media:
