@@ -5,13 +5,13 @@ from .models import (
     Subscribe, Galery, PageBanner, MetaTag,
     NavbarItem, DynamicPage, SocialMedia,
 )
-from modeltranslation.admin import TranslationAdmin
+from modeltranslation.admin import TranslationAdmin, TabbedTranslationAdmin
 from django.conf import settings
 from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
 
 @admin.register(GeneralItem)
-class GeneralItemAdmin(TranslationAdmin):
+class GeneralItemAdmin(TabbedTranslationAdmin):
     list_display = ('title',)
     group_fieldsets = True    
     class Media:
@@ -26,7 +26,7 @@ class GeneralItemAdmin(TranslationAdmin):
 
 
 @admin.register(NavbarItem)
-class NavbarItemAdmin(TranslationAdmin):
+class NavbarItemAdmin(TabbedTranslationAdmin):
     list_display = ('title', 'url', 'order', 'is_active', 'position')
     
     group_fieldsets = True    
@@ -42,7 +42,7 @@ class NavbarItemAdmin(TranslationAdmin):
     
     
 @admin.register(HomeSlider)
-class HomeSliderAdmin(TranslationAdmin):
+class HomeSliderAdmin(TabbedTranslationAdmin):
     list_display = ('title', 'image',)
     group_fieldsets = True    
     class Media:
@@ -56,7 +56,7 @@ class HomeSliderAdmin(TranslationAdmin):
         }
     
 @admin.register(About)
-class AboutAdmin(TranslationAdmin):
+class AboutAdmin(TabbedTranslationAdmin):
     list_display = ('title',)
     group_fieldsets = True    
     class Media:
@@ -71,7 +71,7 @@ class AboutAdmin(TranslationAdmin):
     
     
 @admin.register(IslamCondition)
-class IslamConditionAdmin(TranslationAdmin):
+class IslamConditionAdmin(TabbedTranslationAdmin):
     list_display = ('title', 'image',)
     group_fieldsets = True    
     class Media:
@@ -86,7 +86,7 @@ class IslamConditionAdmin(TranslationAdmin):
     
     
 @admin.register(Statistic)
-class StatisticAdmin(TranslationAdmin):
+class StatisticAdmin(TabbedTranslationAdmin):
     list_display = ('title', 'value',)
     group_fieldsets = True    
     class Media:
@@ -101,7 +101,7 @@ class StatisticAdmin(TranslationAdmin):
     
     
 @admin.register(StatisticInfo)
-class StatisticInfoAdmin(TranslationAdmin):
+class StatisticInfoAdmin(TabbedTranslationAdmin):
     list_display = ('title', 'image',)
     group_fieldsets = True    
     class Media:
@@ -126,7 +126,7 @@ class GaleryAdmin(admin.ModelAdmin):
     
     
 @admin.register(PageBanner)
-class PageBannerAdmin(TranslationAdmin):
+class PageBannerAdmin(TabbedTranslationAdmin):
     list_display = ('page', 'title', 'image')
     group_fieldsets = True    
     class Media:
@@ -147,7 +147,7 @@ class MetaTagAdmin(admin.ModelAdmin):
 
 
 @admin.register(DynamicPage)
-class DynamicPageAdmin(TranslationAdmin):
+class DynamicPageAdmin(TabbedTranslationAdmin):
     list_display = ('title', 'slug', 'banner_img', 'created_at')
     group_fieldsets = True    
     class Media:
