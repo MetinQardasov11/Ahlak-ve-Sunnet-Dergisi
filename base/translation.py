@@ -48,5 +48,5 @@ class NavbarItemTranslationOptions(TranslationOptions):
 
 @register(DynamicPage)
 class DynamicPageTranslationOptions(TranslationOptions):
-    fields = ('content',)
+    fields = ('title', 'content',)
     

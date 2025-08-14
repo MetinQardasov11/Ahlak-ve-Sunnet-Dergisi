@@ -1,0 +1,157 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-14 16:14+0400\n"
+"PO-Revision-Date: 2025-08-14 14:52+0300\n"
+"Last-Translator:   <>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Translated-Using: django-rosetta 0.10.1\n"
+
+#: templates/base/404.html:20
+msgid "Ups! Sayfa Bulunamadı!"
+msgstr "عفواً! لم يتم العثور على الصفحة!"
+
+#: templates/base/404.html:22 templates/video/video-not-found.html:21
+msgid "Ana Sayfaya Geri Dön"
+msgstr "العودة إلى الصفحة الرئيسية"
+
+#: templates/base/about.html:20 templates/base/dynamic_page.html:20
+#: templates/base/galery.html:20 templates/blog/blog-details.html:20
+#: templates/blog/blogs.html:20 templates/contact/contact.html:20
+#: templates/service/service-details.html:20 templates/service/services.html:20
+#: templates/video/playlist.html:24 templates/video/video-details.html:20
+msgid "Ana Sayfa"
+msgstr "الصفحة الرئيسية"
+
+#: templates/base/about.html:44 templates/base/index.html:60
+#: templates/base/index.html:148
+msgid "Hakkımızda"
+msgstr "معلومات عنا"
+
+#: templates/base/about.html:62
+msgid "İslamın Şartları"
+msgstr "أركان الإسلام"
+
+#: templates/base/about.html:63
+msgid "İslamın 5 şartı var"
+msgstr "أركان الإسلام خمسة"
+
+#: templates/base/galery.html:35
+msgid "Galeri"
+msgstr "معرض الصور"
+
+#: templates/base/galery.html:53
+msgid "Henüz resim ilave olunmayıb"
+msgstr "لم تتم إضافة أي صور بعد"
+
+#: templates/base/index.html:29 templates/base/index.html:65
+#: templates/base/index.html:118 templates/base/index.html:184
+#: templates/base/index.html:194 templates/blog/blogs.html:87
+msgid "Daha Fazlası"
+msgstr "المزيد"
+
+#: templates/base/index.html:82 templates/base/index.html:83
+msgid "Servislerimiz"
+msgstr "خدماتنا"
+
+#: templates/base/index.html:101 templates/service/services.html:54
+msgid "Daha Fazla"
+msgstr "المزيد"
+
+#: templates/base/index.html:162 templates/blog/blog-details.html:21
+msgid "Makaleler"
+msgstr "المدوناتالمقالات"
+
+#: templates/blog/blogs.html:37
+msgid "Kategorileri seçin"
+msgstr "اختر الفئات"
+
+#: templates/blog/blogs.html:47
+msgid "Kategori seç"
+msgstr "اختر الفئة"
+
+#: templates/blog/blogs.html:98
+msgid "Henüz makaleler ilave olunmayıb"
+msgstr "لم تتم إضافة أي مقالات بعد"
+
+#: templates/contact/contact.html:48
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: templates/contact/contact.html:66
+msgid "Telefon Numaraları"
+msgstr "أرقام الهواتف"
+
+#: templates/contact/contact.html:82
+msgid "Sorularınızı bize bildirebilirsiniz."
+msgstr "يمكنك إخبارنا بأسئلتك."
+
+#: templates/contact/contact.html:109
+msgid "Mesajı Gönder"
+msgstr "أرسل الرسالة"
+
+#: templates/partials/_footer.html:35
+msgid "Hızlı Bağlantılar"
+msgstr "روابط سريعة"
+
+#: templates/partials/_footer.html:60
+msgid "Abone Ol"
+msgstr "اشترك"
+
+#: templates/partials/_footer.html:65
+msgid "Abone ol"
+msgstr "اشترك"
+
+#: templates/partials/_footer.html:83
+msgid "Tüm hakları saklıdır."
+msgstr "جميع الحقوق محفوظة."
+
+#: templates/service/service-details.html:21
+msgid "Hizmetler"
+msgstr "الخدمات"
+
+#: templates/service/service-details.html:58
+msgid "Tüm Hizmetler"
+msgstr "جميع الخدمات"
+
+#: templates/service/services.html:34
+msgid "Hizmetlerimiz"
+msgstr "خدماتنا"
+
+#: templates/service/services.html:35
+msgid "İnsanlık için Hizmetlerimiz"
+msgstr "خدماتنا من أجل الإنسانية"
+
+#: templates/service/services.html:70
+msgid "Henüz hizmet ilave olunmayıb"
+msgstr "لم تتم إضافة أي خدمات بعد"
+
+#: templates/video/playlist.html:35
+msgid "Oynatma Listeleri"
+msgstr "قوائم التشغيل"
+
+#: templates/video/playlist.html:67
+msgid "Henüz oynatma listesi ilave olunmayıb"
+msgstr "لم تتم إضافة أي قائمة تشغيل بعد"
+
+#: templates/video/video-details.html:57
+msgid "Önerilen Videolar"
+msgstr "الفيديوهات المقترحة"
+
+#, fuzzy
+#~| msgid "Makaleler"
+#~ msgid "Makleler"
+#~ msgstr "المدوناتالمقالات"

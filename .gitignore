@@ -90,3 +90,10 @@ config/certbot/
 staticfiles/
 staticfiles_ahlak/
 media/
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/

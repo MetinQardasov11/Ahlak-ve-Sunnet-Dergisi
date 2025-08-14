@@ -1,0 +1,150 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-14 16:14+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: templates/base/404.html:20
+msgid "Ups! Sayfa Bulunamadı!"
+msgstr ""
+
+#: templates/base/404.html:22 templates/video/video-not-found.html:21
+msgid "Ana Sayfaya Geri Dön"
+msgstr ""
+
+#: templates/base/about.html:20 templates/base/dynamic_page.html:20
+#: templates/base/galery.html:20 templates/blog/blog-details.html:20
+#: templates/blog/blogs.html:20 templates/contact/contact.html:20
+#: templates/service/service-details.html:20 templates/service/services.html:20
+#: templates/video/playlist.html:24 templates/video/video-details.html:20
+msgid "Ana Sayfa"
+msgstr ""
+
+#: templates/base/about.html:44 templates/base/index.html:60
+#: templates/base/index.html:148
+msgid "Hakkımızda"
+msgstr ""
+
+#: templates/base/about.html:62
+msgid "İslamın Şartları"
+msgstr ""
+
+#: templates/base/about.html:63
+msgid "İslamın 5 şartı var"
+msgstr ""
+
+#: templates/base/galery.html:35
+msgid "Galeri"
+msgstr ""
+
+#: templates/base/galery.html:53
+msgid "Henüz resim ilave olunmayıb"
+msgstr ""
+
+#: templates/base/index.html:29 templates/base/index.html:65
+#: templates/base/index.html:118 templates/base/index.html:184
+#: templates/base/index.html:194 templates/blog/blogs.html:87
+msgid "Daha Fazlası"
+msgstr ""
+
+#: templates/base/index.html:82 templates/base/index.html:83
+msgid "Servislerimiz"
+msgstr ""
+
+#: templates/base/index.html:101 templates/service/services.html:54
+msgid "Daha Fazla"
+msgstr ""
+
+#: templates/base/index.html:162 templates/blog/blog-details.html:21
+msgid "Makaleler"
+msgstr ""
+
+#: templates/blog/blogs.html:37
+msgid "Kategorileri seçin"
+msgstr ""
+
+#: templates/blog/blogs.html:47
+msgid "Kategori seç"
+msgstr ""
+
+#: templates/blog/blogs.html:98
+msgid "Henüz makaleler ilave olunmayıb"
+msgstr ""
+
+#: templates/contact/contact.html:48
+msgid "Email"
+msgstr ""
+
+#: templates/contact/contact.html:66
+msgid "Telefon Numaraları"
+msgstr ""
+
+#: templates/contact/contact.html:82
+msgid "Sorularınızı bize bildirebilirsiniz."
+msgstr ""
+
+#: templates/contact/contact.html:109
+msgid "Mesajı Gönder"
+msgstr ""
+
+#: templates/partials/_footer.html:35
+msgid "Hızlı Bağlantılar"
+msgstr ""
+
+#: templates/partials/_footer.html:60
+msgid "Abone Ol"
+msgstr ""
+
+#: templates/partials/_footer.html:65
+msgid "Abone ol"
+msgstr ""
+
+#: templates/partials/_footer.html:83
+msgid "Tüm hakları saklıdır."
+msgstr ""
+
+#: templates/service/service-details.html:21
+msgid "Hizmetler"
+msgstr ""
+
+#: templates/service/service-details.html:58
+msgid "Tüm Hizmetler"
+msgstr ""
+
+#: templates/service/services.html:34
+msgid "Hizmetlerimiz"
+msgstr ""
+
+#: templates/service/services.html:35
+msgid "İnsanlık için Hizmetlerimiz"
+msgstr ""
+
+#: templates/service/services.html:70
+msgid "Henüz hizmet ilave olunmayıb"
+msgstr ""
+
+#: templates/video/playlist.html:35
+msgid "Oynatma Listeleri"
+msgstr ""
+
+#: templates/video/playlist.html:67
+msgid "Henüz oynatma listesi ilave olunmayıb"
+msgstr ""
+
+#: templates/video/video-details.html:57
+msgid "Önerilen Videolar"
+msgstr ""

@@ -37,7 +37,7 @@ def blog_detail(request, blog_slug):
     try:
         blog = Blog.objects.get(slug=blog_slug, language=user_language)
     except Blog.DoesNotExist:
-        return redirect('base:error')
+        return redirect('base:index')
     
     context = {
         'blog' : blog,

@@ -35,7 +35,7 @@
               <h3>{% trans 'Hızlı Bağlantılar' %}</h3>
             </div>
             <ul>
-                {% for item in navbar_items %}
+                {% for item in footer_items %}
                     {% if current_language == "tr" %}
                         <li>
                             <a class="{% if item.url == '/' and request.path == '/' or item.url != '/' and item.url in request.path %} active {% endif %}" 
@@ -74,7 +74,7 @@
       <div class="row g-0 d-flex justify-content-center">
         <div class="col col-lg-6 col-12">
           <p class="text-center text-white mb-3">
-            &copy;
+            Copyright &copy;
             {% if item.title %}
                 <span style="color: #FED91F; font-weight: bolder">{{ item.title }}</span>
             {% endif %}

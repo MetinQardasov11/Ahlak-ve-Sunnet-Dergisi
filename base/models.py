@@ -227,7 +227,7 @@ class MetaTag(DateModel):
         
         
 class DynamicPage(DateModel):
-    title = models.CharField(max_length=200, verbose_name = "Sayfa Adı", blank=True, null=True, help_text='Bu bölümü tercüme yapmayınız.')
+    title = models.CharField(max_length=200, verbose_name = "Sayfa Adı", blank=True, null=True)
     banner_img = models.ImageField(upload_to='dynamic_page_banner', verbose_name = "Banner", blank=True, null=True)
     content = RichTextField(verbose_name = "İçerik", blank=True, null=True, help_text='İçerik tercüme olunamlıdır eğer diğer dillerde varsa. Default dil türkçedir')
     slug = models.SlugField(unique=True, verbose_name = "URL", blank=True, null=True)

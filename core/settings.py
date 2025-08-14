@@ -1,19 +1,17 @@
 from pathlib import Path
-import environ
 import os
 from os import getenv
-from django.conf.global_settings import LANGUAGES as DJANGO_LANGUAGES
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-env = environ.Env()
-environ.Env.read_env(BASE_DIR / '.env')
 
 SECRET_KEY = 'django-insecure-futhsy75_1@17l&max_a9d#b)k597*#mp9aj0(pdg9f$t2hsrb'
 
 DEBUG = False
 
-ALLOWED_HOSTS = [ 'islamhayatdergisi.com']
+ALLOWED_HOSTS = ['islamhayatdergisi.com']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://islamhayatdergisi.com',
@@ -35,15 +33,6 @@ INSTALLED_APPS = [
     'colorfield',
     'rest_framework',
     'ckeditor',
-    # 'jazzmin',
-    # 'semantic_admin',
-    # 'semantic_forms',
-    # 'unfold',
-    # 'unfold.contrib.filters',
-    # 'unfold.contrib.forms',
-    # 'unfold.contrib.inlines',
-    # 'unfold.contrib.import_export',
-    # 'unfold.contrib.guardian',
     'rosetta',
     'modeltranslation',
     'django.contrib.admin',
@@ -93,42 +82,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'core.wsgi.application'
 
 
-
-
-# if not DEBUG:
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('POSTGRES_DB'),
-        'USER': env('POSTGRES_USER'),
-        'PASSWORD': env('POSTGRES_PASSWORD'),
-        'HOST': env('POSTGRES_HOST', default='db'),
-        'PORT': env('POSTGRES_PORT', default='5432'),
+        'NAME': getenv('POSTGRES_DB'),
+        'USER': getenv('POSTGRES_USER'),
+        'PASSWORD': getenv('POSTGRES_PASSWORD'),
+        'HOST': getenv('POSTGRES_HOST', default='db'),
+        'PORT': getenv('POSTGRES_PORT', default='5432'),
     }
 }
-
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-#}
-
-
-# else:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': getenv('POSTGRES_DB'),
-#             'USER': getenv('POSTGRES_USER'),
-#             'PASSWORD': getenv('POSTGRES_PASSWORD'),
-#             'HOST': getenv('POSTGRES_HOST'),
-#             'PORT': 5432,
-#         }
-# }
-
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -145,6 +108,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 LANGUAGE_CODE = 'tr'
 
