@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-futhsy75_1@17l&max_a9d#b)k597*#mp9aj0(pdg9f$t2hsrb'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['islamhayatdergisi.com', 'www.islamhayatdergisi.com']
 
