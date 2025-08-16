@@ -11,7 +11,7 @@ SECRET_KEY = 'django-insecure-futhsy75_1@17l&max_a9d#b)k597*#mp9aj0(pdg9f$t2hsrb
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['islamhayatdergisi.com']
+ALLOWED_HOSTS = ['islamhayatdergisi.com', 'www.islamhayatdergisi.com']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://islamhayatdergisi.com',
