@@ -23,10 +23,9 @@ jobs:
             cd /root/Ahlak-ve-Sunnet-Dergisi
             git fetch origin
             git pull --rebase origin master
-            docker compose down
+            docker compose down --rmi local --remove-orphans
             docker compose up -d --build
-            docker exec -it web_ahlak 
-            docker compose exec web_ahlak python manage.py makemigrations
-            docker compose exec web_ahlak python manage.py migrate
+            docker compose exec web_ahlak python manage.py makemigrations --noinput
+            docker compose exec web_ahlak python manage.py migrate --noinput
             docker compose exec web_ahlak python manage.py collectstatic --noinput
           EOF
