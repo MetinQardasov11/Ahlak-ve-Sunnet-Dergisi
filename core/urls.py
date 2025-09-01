@@ -17,7 +17,7 @@ urlpatterns += i18n_patterns(
     path('playlist/', include('video.urls', namespace='video')),
     path('hizmetler/', include('service.urls', namespace='service')),
     path('iletisim/', include('contact.urls', namespace='contact')),
-    path('api/', include('video.api.urls')),
+    # path('api/', include('video.api.urls')),
     path('<slug:slug>/', dynamic_page_view, name='dynamic_page'),
     prefix_default_language=False,
 )

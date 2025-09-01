@@ -7,9 +7,9 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-futhsy75_1@17l&max_a9d#b)k597*#mp9aj0(pdg9f$t2hsrb'
+SECRET_KEY = getenv('SECRET_KEY')
 
-DEBUG = False
+DEBUG = getenv('DEBUG')
 
 ALLOWED_HOSTS = ['islamhayatdergisi.com', 'www.islamhayatdergisi.com']
 
@@ -137,7 +137,6 @@ MODELTRANSLATION_FALLBACK_LANGUAGES = {
     'default': (),
 }
 
-
 STATIC_URL = 'static-ahlak/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
@@ -148,9 +147,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-API_KEY = "AIzaSyDfkOf5ukZEt5sGsXHg7qh6iXBd3L7pXIM"
-CHANNEL_ID = "UCn6c3M9iD_-i0twEX0r2V0g"
 
 EMAIL_BACKEND = getenv('EMAIL_BACKEND')
 EMAIL_HOST = getenv('EMAIL_HOST')
