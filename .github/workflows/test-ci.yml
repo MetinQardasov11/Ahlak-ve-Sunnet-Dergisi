@@ -35,6 +35,9 @@ jobs:
           echo "EMAIL_HOST_PASSWORD='${{ secrets.EMAIL_HOST_PASSWORD }}'" >> .env
           echo "EMAIL_PORT='${{ secrets.EMAIL_PORT }}'" >> .env
           echo "DEFAULT_FROM_EMAIL='${{ secrets.DEFAULT_FROM_EMAIL }}'" >> .env
+          echo "HTTP_PORT='${{ secrets.HTTP_PORT }}'" >> .env
+          echo "STATS_PORT='${{ secrets.STATS_PORT }}'" >> .env
+          
 
       - name: Copy .env to server
         run: |
