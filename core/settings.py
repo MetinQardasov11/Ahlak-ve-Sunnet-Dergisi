@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     'base.apps.BaseConfig',
     'blog.apps.BlogConfig',
     'service.apps.ServiceConfig',
-    'video.apps.VideoConfig',
     'contact.apps.ContactConfig',
     'admin_interface',
     'colorfield',
