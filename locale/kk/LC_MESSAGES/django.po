@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-14 16:14+0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2025-08-14 18:45+0300\n"
+"Last-Translator: Metin Qardaşov <metin.qardasov2003@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Translated-Using: django-rosetta 0.10.1\n"
 
 #: templates/base/404.html:20
 msgid "Ups! Sayfa Bulunamadı!"
@@ -29,8 +30,9 @@ msgstr "Vegere Serûpelê"
 #: templates/base/about.html:20 templates/base/dynamic_page.html:20
 #: templates/base/galery.html:20 templates/blog/blog-details.html:20
 #: templates/blog/blogs.html:20 templates/contact/contact.html:20
-#: templates/service/service-details.html:20 templates/service/services.html:20
-#: templates/video/playlist.html:24 templates/video/video-details.html:20
+#: templates/service/service-details.html:20
+#: templates/service/services.html:20 templates/video/playlist.html:24
+#: templates/video/video-details.html:20
 msgid "Ana Sayfa"
 msgstr "Serûpel"
 
@@ -150,6 +152,5 @@ msgid "Önerilen Videolar"
 msgstr "Vîdyoyên Pêşniyarkirî"
 
 #, fuzzy
-#~| msgid "Makaleler"
 #~ msgid "Makleler"
 #~ msgstr "Gotar"
