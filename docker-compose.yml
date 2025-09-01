@@ -21,6 +21,10 @@ services:
     restart: "always"
     ports:
       - "8050:8000"
+    command: >
+      sh -c "python manage.py makemigrations --noinput &&
+             python manage.py migrate --noinput &&
+             python manage.py collectstatic --noinput &&"
     volumes:
       - .:/code
       - ./static/:/code/static/
