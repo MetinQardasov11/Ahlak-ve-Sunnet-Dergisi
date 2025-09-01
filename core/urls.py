@@ -14,7 +14,6 @@ urlpatterns += i18n_patterns(
     path('', include('base.urls', namespace='base')),
     path('rosetta/', include('rosetta.urls')),
     path('makaleler/', include('blog.urls', namespace='blog')),
-    path('playlist/', include('video.urls', namespace='video')),
     path('hizmetler/', include('service.urls', namespace='service')),
     path('iletisim/', include('contact.urls', namespace='contact')),
     path('<slug:slug>/', dynamic_page_view, name='dynamic_page'),
