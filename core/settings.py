@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = getenv('SECRET_KEY')
 
-DEBUG = getenv('DEBUG')
+DEBUG = getenv('DEBUG', 'False').lower() in ('true', '1', 'yes')
 
 ALLOWED_HOSTS = ['islamhayatdergisi.com', 'www.islamhayatdergisi.com']
 
