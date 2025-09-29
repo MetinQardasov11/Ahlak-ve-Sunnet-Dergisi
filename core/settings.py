@@ -11,7 +11,7 @@ SECRET_KEY = getenv('SECRET_KEY')
 
 DEBUG = getenv('DEBUG', 'False').lower() in ('true', '1', 'yes')
 
-ALLOWED_HOSTS = ['islamhayatdergisi.com', 'www.islamhayatdergisi.com']
+ALLOWED_HOSTS = ['islamhayatdergisi.com', 'www.islamhayatdergisi.com', '127.0.0.1', 'localhost']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://islamhayatdergisi.com',

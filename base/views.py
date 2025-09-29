@@ -14,6 +14,11 @@ from .models import (
     Galery
 )
 
+
+def not_stared(request):
+    return render(request, 'base/not_stared.html')
+
+
 def index(request):
     user_language = get_language()
     sliders = HomeSlider.objects.order_by('-created_at').all()
