@@ -30,7 +30,6 @@ INSTALLED_APPS = [
     'contact.apps.ContactConfig',
     'admin_interface',
     'colorfield',
-    'rest_framework',
     'ckeditor',
     'rosetta',
     'modeltranslation',
