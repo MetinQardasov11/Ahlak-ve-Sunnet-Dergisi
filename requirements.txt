@@ -6,11 +6,14 @@ django-admin-interface==0.31.0
 django-ckeditor==6.7.3
 django-cleanup==9.0.0
 django-colorfield==0.14.0
+django-environ==0.12.0
 django-js-asset==3.1.2
 django-modeltranslation==0.19.6
 django-rosetta==0.10.2
 django-tinymce==5.0.0
+gunicorn==23.0.0
 idna==3.11
+packaging==25.0
 pillow==12.0.0
 polib==1.2.0
 psycopg2==2.9.11
